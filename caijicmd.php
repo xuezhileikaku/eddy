@@ -2,9 +2,9 @@
 /*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Author:Eddy
- * Date:2012Äê12ÔÂ10ÈÕ 
- * ÃüÁîĞĞÄ£Ê½ÔËĞĞ´Ëphp½Å±¾ 
- * Example£ºphp -f caijicmd.php http://bj.h2h.cn/f2660gp1.html
+ * Date:2012å¹´12æœˆ10æ—¥ 
+ * å‘½ä»¤è¡Œæ¨¡å¼è¿è¡Œæ­¤phpè„šæœ¬ 
+ * Exampleï¼šphp -f caijicmd.php http://bj.h2h.cn/f2660gp1.html
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * *
  */
@@ -19,18 +19,18 @@ $path = dirname(__FILE__);
 require $path.'\Snoopy.class.php';
 if ($argc==2) {
 	$url = $argv[1];
-	// ÑéÖ¤urlºÏ·¨ĞÔ
+	// éªŒè¯urlåˆæ³•æ€§
 	if (! preg_match ( '/^https?:\/\/[a-zA-Z0-9\-\.]+/i', $url )) {
-		echo "Ö´ĞĞÊ§°Ü!URL²»ºÏ·¨!\r\n";
+		echo "æ‰§è¡Œå¤±è´¥!URLä¸åˆæ³•!\r\n";
 		exit ();
 	}
-	// È¡Ò³Ãæ·ÖÒ³µÄ×îºóÒ»Ò³
+	// å–é¡µé¢åˆ†é¡µçš„æœ€åä¸€é¡µ
 	$snoopy = new Snoopy ();
 	$snoopy->fetch ( $url );
 	if (preg_match_all ( '%(?<=<a href=\'/).*?(?=\' class=\'pagerlink\')%', $snoopy->results, $matches )) {
-		if (strpos ( $snoopy->results, 'Î²Ò³' )) {
+		if (strpos ( $snoopy->results, 'å°¾é¡µ' )) {
 			$lastUrl = end ( $matches [0] );
-		} elseif (strpos ( $snoopy->results, 'ÏÂÒ»Ò³' )) {
+		} elseif (strpos ( $snoopy->results, 'ä¸‹ä¸€é¡µ' )) {
 			$len = count ( $matches [0] );
 			$lastUrl = $matches [0] [$len - 2];
 		} else {
@@ -41,11 +41,11 @@ if ($argc==2) {
 	}
 	$snoopy = null;
 	
-	// Éú³É´ıÑ­»·¶ÁÈ¡Ò³Ãæ
+	// ç”Ÿæˆå¾…å¾ªç¯è¯»å–é¡µé¢
 	if ($lastUrl != '') {
 		$sp = explode ( '.', $lastUrl );
 		$spLen = count ( $sp );
-		// ÅĞ¶ÏÊÇ·ñÖ»ÓĞ1Ò³
+		// åˆ¤æ–­æ˜¯å¦åªæœ‰1é¡µ
 		if ($spLen == 2) {
 			$spUrl = $sp [0];
 		} else {
@@ -61,33 +61,33 @@ if ($argc==2) {
 			}
 		}
 		$yUrl = array ();
-		// ÅĞ¶ÏÊÇ·ñÖ»ÓĞ1Ò³
+		// åˆ¤æ–­æ˜¯å¦åªæœ‰1é¡µ
 		if ($sum > 1) {
 			$s = substr ( $url, 0, strrpos ( $url, '/' ) );
 			for($i = 1; $i <= $sum; ++ $i) {
-				$yUrl [] = $s . '/' . $furl . $i . '.html'; // Æ´½Óurl
+				$yUrl [] = $s . '/' . $furl . $i . '.html'; // æ‹¼æ¥url
 			}
 		} else {
 			$yUrl [] = $url;
 		}
 	}
 	
-	echo '±¾´Î¹²Ğè´¦Àí', count ( $yUrl ), "Ò³\r\n";
+	echo 'æœ¬æ¬¡å…±éœ€å¤„ç†', count ( $yUrl ), "é¡µ\r\n";
 	ob_flush ();
 	flush ();
 	
-	$biaotou = 'ÍøÖ·' . "\t" . '±êÌâ' . "\t" . 'µç»°' . "\t" . 'Email' . "\t" . 'ÏêÏ¸ĞÅÏ¢' . "\t" . '·¢²¼Ê±¼ä' . "\t" . "\n";
+	$biaotou = 'ç½‘å€' . "\t" . 'æ ‡é¢˜' . "\t" . 'ç”µè¯' . "\t" . 'Email' . "\t" . 'è¯¦ç»†ä¿¡æ¯' . "\t" . 'å‘å¸ƒæ—¶é—´' . "\t" . "\n";
 	$fh = fopen ( $path.'\jilu.txt', 'a+' );
 	fwrite ( $fh, $biaotou );
 	fclose ( $fh );
 	
 	foreach ( $yUrl as $url ) {
-		// È¡µ±Ç°Ò³ÃæµÄËùÓĞ´ı²É¼¯Ò³ÃæµÄÓĞĞ§Á´½Ó
+		// å–å½“å‰é¡µé¢çš„æ‰€æœ‰å¾…é‡‡é›†é¡µé¢çš„æœ‰æ•ˆé“¾æ¥
 		$snoopy = new Snoopy ();
 		$snoopy->fetchlinks ( $url );
 		$myurl = array ();
 		
-		echo "·ÖÎöÒ³Ãæ£º", $url,"\r\n";
+		echo "åˆ†æé¡µé¢ï¼š", $url,"\r\n";
 		ob_flush ();
 		flush ();
 		
@@ -98,41 +98,41 @@ if ($argc==2) {
 		}
 		$snoopy = null;
 		
-		echo 'µ±Ç°Ò³ÃæĞè´¦ÀíÁ´½ÓÊı£º', count ( $myurl ) - 4, "\r\n";
+		echo 'å½“å‰é¡µé¢éœ€å¤„ç†é“¾æ¥æ•°ï¼š', count ( $myurl ) - 4, "\r\n";
 		ob_flush ();
 		flush ();
 		
 		$snoopy = new Snoopy ();
-		// Ç°4ÌõÊı¾İÎŞĞ§
+		// å‰4æ¡æ•°æ®æ— æ•ˆ
 		for($i = 0; $i < 4; ++ $i) {
 			unset ( $myurl [$i] );
 		}
 		
-		// ²É¼¯µ±Ç°Ò³Ãæ
+		// é‡‡é›†å½“å‰é¡µé¢
 		$savestr = '';
 		foreach ( $myurl as $v ) {
 			$snoopy->fetch ( $v );
-			echo "²É¼¯Ò³Ãæ£º", $v, "\r\n";
+			echo "é‡‡é›†é¡µé¢ï¼š", $v, "\r\n";
 			ob_flush ();
 			flush ();
-			// echo 'µØÖ·£º',$v,"\r\n";
+			// echo 'åœ°å€ï¼š',$v,"\r\n";
 			$savestr .= $v . "\t";
 			
 			if (preg_match ( '/(?<=<h1>).*(?=<\/h1>)/', $snoopy->results, $matches )) {
-				// echo '±êÌâ£º',$matches[0],"\r\n";
+				// echo 'æ ‡é¢˜ï¼š',$matches[0],"\r\n";
 				$savestr .= trim ( $matches [0] ) . "\t";
 			} else {
 				$savestr .= 'NULL' . "\t";
 			}
 			
 			if (preg_match ( '/(?<="tel STYLE1">).*(?=<\/strong>)/', $snoopy->results, $matches )) {
-				// echo 'µç»°£º',$matches[0],"\r\n";
+				// echo 'ç”µè¯ï¼š',$matches[0],"\r\n";
 				$savestr .= trim ( $matches [0] ) . "\t";
 			} else {
 				$savestr .= 'NULL' . "\t";
 			}
 			
-			if (preg_match ( '%(?<=EMail£º</em>).*?(?=</li>)%', $snoopy->results, $matches )) {
+			if (preg_match ( '%(?<=EMailï¼š</em>).*?(?=</li>)%', $snoopy->results, $matches )) {
 				// Email
 				$savestr .= trim ( $matches [0] ) . "\t";
 			} else {
@@ -140,14 +140,14 @@ if ($argc==2) {
 			}
 			
 			if (preg_match ( '/(?<=p" >)\s*.*\s*(?=<\/p>)/', $snoopy->results, $matches )) {
-				// echo 'ÏêÏ¸ĞÅÏ¢£º',trim($matches[0]),"\r\n";
+				// echo 'è¯¦ç»†ä¿¡æ¯ï¼š',trim($matches[0]),"\r\n";
 				$savestr .= trim ( $matches [0] ) . "\t";
 			} else {
 				$savestr .= 'NULL' . "\t";
 			}
 			
-			if (preg_match ( '/(?<=·¢²¼Ê±¼ä£º).*?(?=&nbsp)/', $snoopy->results, $matches )) {
-				// ·¢²¼Ê±¼ä
+			if (preg_match ( '/(?<=å‘å¸ƒæ—¶é—´ï¼š).*?(?=&nbsp)/', $snoopy->results, $matches )) {
+				// å‘å¸ƒæ—¶é—´
 				$savestr .= trim ( $matches [0] );
 			} else {
 				$savestr .= 'NULL';
@@ -160,11 +160,11 @@ if ($argc==2) {
 		$fh = fopen ( $path.'\jilu.txt', 'a+' );
 		fwrite ( $fh, $savestr );
 		fclose ( $fh );
-		echo 'Êı¾İ´æÅÌ', "\r\n";
+		echo 'æ•°æ®å­˜ç›˜', "\r\n";
 		ob_flush ();
 		flush ();
 	}
-	echo '²É¼¯Íê±Ï£¡',"\r\n";
+	echo 'é‡‡é›†å®Œæ¯•ï¼',"\r\n";
 }
 ?>
 
