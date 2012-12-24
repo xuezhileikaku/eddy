@@ -16,7 +16,7 @@ include "config.php";
 $snoopy = new Snoopy;
 $snoopy->fetch($hostaddr . '/?useValid=0.'.time());
 
-/*
+
 foreach($snoopy->headers as $value){
 	if(strpos($value,'Cookie')){
 		$strR=$value;
@@ -32,11 +32,16 @@ if(version_compare(PHP_VERSION, '5.3.0') >= 0){
 	$cookieName =trim(strstr($data[0],' '));
 	//$cookie = trim(substr($data[1],0,32));//也有可能是32
 	$cookie = trim(substr($data[1],0,26)); 
+	//加个判断，把两种情况都考虑
+	$p = trim(substr($data[1],0,27));
+	if(sub_str($p,-1) != ';'){
+		$cookie = trim(substr($data[1],0,32));
+	}
 }
-*/
+
 //其实上面只是获取session cookie，后来知道php中有相应函数可以获取，很简单
-$cookieName=session_name();
-$cookie=session_id();
+//$cookieName=session_name();
+//$cookie=session_id();//这个还是不能这么取
 $_SESSION['cookieName']=$cookieName;
 
 $imgcode=base64_encode($snoopy->results);
