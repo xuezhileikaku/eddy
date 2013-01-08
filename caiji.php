@@ -75,7 +75,7 @@ if (isset ( $_POST ['submit'] ) && isset ( $_POST ['url'] )) {
 	ob_flush ();
 	flush ();
 	
-	$biaotou = '网址' . "\t" . '标题' . "\t" . '电话' . "\t" . 'Email' . "\t" . '详细信息' . "\t" . '发布时间' . "\t" . "\n";
+	$biaotou = '网址' . "\t" . '标题' . "\t" . '电话' . "\t" . 'Email' . "\t" . '详细信息' . "\t" . '发布时间' . "\t" . "\r\n";
 	$fh = fopen ( './jilu.txt', 'a+' );
 	fwrite ( $fh, $biaotou );
 	fclose ( $fh );
@@ -152,7 +152,7 @@ if (isset ( $_POST ['submit'] ) && isset ( $_POST ['url'] )) {
 				$savestr .= 'NULL';
 			}
 			// echo '<hr/>';
-			$savestr .= "\n";
+			$savestr .= "\r\n";
 		}
 		$snoopy = null;
 		
