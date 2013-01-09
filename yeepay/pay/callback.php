@@ -10,6 +10,9 @@
 include 'yeepayCommon.php';	
 
 include 'mt.php';
+
+ini_set("magic_quotes_runtime",0);
+require './lib/class.phpmailer.php';
 	
 #	只有支付成功时易宝支付才会通知商户.
 ##支付成功回调有两次，都会通知到在线支付请求参数中的p8_Url上：浏览器重定向;服务器点对点通讯.
@@ -87,9 +90,38 @@ if($bRet){
 
 			$mt4request->CloseConnection();
 
+			//发送邮件通知
+			try {
+				$mail = new PHPMailer(true); 
+				$mail->IsSMTP();
+				$mail->CharSet='GBK'; //设置邮件的字符编码，这很重要，不然中文乱码
+				$mail->SMTPAuth   = true;                  //开启认证
+				$mail->Port       = 25;                    
+				$mail->Host       = "smtp.163.com"; 
+				$mail->Username   = "yiyiyitest@163.com";    
+				$mail->Password   = "";            
+				//$mail->IsSendmail(); //如果没有sendmail组件就注释掉，否则出现“Could  not execute: /var/qmail/bin/sendmail ”的错误提示
+				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
+				$mail->From       = "yiyiyitest@163.com";
+				$mail->FromName   = "Admin";
+				$to = "eddy@rrgod.com";
+				$mail->AddAddress($to);
+				$mail->Subject  = "在线入金通知";
+				//发送的内容
+				$mail->Body = " 客户在线入金成功，详情如下：\r\n"."账户ID：$r5_Pid\r\n"."金额：$r3_Amt\r\n"."时间：".date('Y-m-d H:i',time());
+				//$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //当邮件不支持html时备用显示，可以省略
+				$mail->WordWrap   = 80; // 设置每行字符串的长度
+				//$mail->AddAttachment("f:/test.png");  //可以添加附件
+				$mail->IsHTML(false); 
+				$mail->Send();
+				echo ' 在线入金通知邮件已发送至管理员邮箱。';
+			} catch (phpmailerException $e) {
+				echo "在线入金通知邮件发送失败：".$e->errorMessage();
+			}
+
 		}elseif($r9_BType=="2"){
 			#如果需要应答机制则必须回写流,以success开头,大小写不敏感.
-			//echo "success";
+			echo "success";
 			//echo "<br />交易成功";
 			//echo  "<br />在线支付服务器返回";      			 
 		}
