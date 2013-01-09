@@ -129,6 +129,14 @@ include('./config.php'); ?>
         $('table span').remove();           
         var type = $(':radio[name=type]:checked').val();
         if (type.length == 0) return false;
+
+		var username = $('#txt_username').val().trim();
+		if(username.length == 0){
+			$('#txt_username').parent().append('<span style="margin-left:6px;">«Î ‰»ÎΩª“◊’À∫≈</span>');
+            $('#txt_username').focus();
+			return false;
+		}
+
         var amount = $('#txt_Amount').val().trim();
         var patrn = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/;
         if (amount.length == 0) {
