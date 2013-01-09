@@ -11,7 +11,7 @@
 include('./config.php'); ?>
 <body>
     <div>
-        <h3>网银支付</h3>
+        <h3>网银支付 - 在线出入金</h3>
         <form method="post" target="_blank" action="<?php echo $actionPayUrl; ?>" id="yeepay_form">
             <table>
                 <colgroup><col width="80"><col width="129"><col width="80"><col></colgroup>
@@ -21,7 +21,7 @@ include('./config.php'); ?>
                 </tr>
                 <tr>
                     <td class="tc">类　　型：</td>
-                    <td colspan="3"><label class="tips"></label><label><input type="radio" value="0" name="type" checked="checked">存款</label></td>
+                    <td colspan="3"><label class="tips"></label><label><input type="radio" value="0" name="type" checked="checked">存款</label><label><input type="radio" value="1" name="type">取款</label></td>
                 </tr>
                 <tr>
                     <td class="tc">金　　额：</td>
@@ -103,8 +103,8 @@ include('./config.php'); ?>
         } else if (!patrn.test(amount)) {
             $(this).parent().append('<span style="margin-left:6px;">金额格式有误</span>');
             return false;
-        } else if (type == 1 && amount > 2.14){
-            $(this).parent().append('<span style="margin-left:6px;">取款金额不得大于可用金额</span>');
+        } else if (type == 1 && amount > 1000000){
+            $(this).parent().append('<span style="margin-left:6px;">取款金额不得大于1000000</span>');
             return false;
         } else if (amount == 0){
             $(this).parent().append('<span style="margin-left:6px;">金额不能为0</span>');
@@ -137,6 +137,8 @@ include('./config.php'); ?>
 			return false;
 		}
 
+		var beizhu = $('#txt_Remark').val().trim();
+
         var amount = $('#txt_Amount').val().trim();
         var patrn = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/;
         if (amount.length == 0) {
@@ -147,8 +149,8 @@ include('./config.php'); ?>
             $('#txt_Amount').parent().append('<span style="margin-left:6px;">金额格式有误</span>');
             $('#txt_Amount').focus();
             return false;
-        } else if (type == 1 && amount > 2.14){
-            $('#txt_Amount').parent().append('<span style="margin-left:6px;">取款金额不得大于可用金额</span>');
+        } else if (type == 1 && amount > 1000000){
+            $('#txt_Amount').parent().append('<span style="margin-left:6px;">取款金额不得大于1000000</span>');
             $('#txt_Amount').focus();
             return false;
         } else if (amount == 0){
@@ -174,12 +176,16 @@ include('./config.php'); ?>
             $('#yeepay_form').submit();
             $('#glasslayer, #alter').show();
         } else if (type == 1){
+			$('#yeepay_form').parent().append('<span style="margin-left:6px;">正在处理中。。。请勿关闭本窗口</span>');
             $.ajax({
                 type: 'post',
-                url: '/ajax/yeepay.ashx',
+                url: './pay/qukuan.php',
+				contentType:"application/x-www-form-urlencoded; charset=gbk",
                 data: {
                     active: 'expelorder',
-                    amount: amount
+						user: username,
+						amount: amount,
+						beizhu: beizhu
                 },
                 success: function (r) {
                     if (r == 1) {

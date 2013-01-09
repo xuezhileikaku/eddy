@@ -11,9 +11,10 @@ include 'yeepayCommon.php';
 
 include 'mt.php';
 
-ini_set("magic_quotes_runtime",0);
+
 require './lib/class.phpmailer.php';
-	
+ini_set("magic_quotes_runtime",0);
+
 #	只有支付成功时易宝支付才会通知商户.
 ##支付成功回调有两次，都会通知到在线支付请求参数中的p8_Url上：浏览器重定向;服务器点对点通讯.
 
@@ -108,13 +109,13 @@ if($bRet){
 				$mail->AddAddress($to);
 				$mail->Subject  = "在线入金通知";
 				//发送的内容
-				$mail->Body = " 客户在线入金成功，详情如下：\r\n"."账户ID：$r5_Pid\r\n"."金额：$r3_Amt\r\n"."时间：".date('Y-m-d H:i',time());
+				$mail->Body = "客户在线入金成功，详情如下：\r\n"."账户ID：$r5_Pid\r\n"."金额：$r3_Amt\r\n"."时间：".date('Y-m-d H:i',time());
 				//$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //当邮件不支持html时备用显示，可以省略
 				$mail->WordWrap   = 80; // 设置每行字符串的长度
 				//$mail->AddAttachment("f:/test.png");  //可以添加附件
 				$mail->IsHTML(false); 
 				$mail->Send();
-				echo ' 在线入金通知邮件已发送至管理员邮箱。';
+				echo '在线入金通知邮件已发送至管理员邮箱。';
 			} catch (phpmailerException $e) {
 				echo "在线入金通知邮件发送失败：".$e->errorMessage();
 			}
