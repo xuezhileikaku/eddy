@@ -5,6 +5,7 @@ Begin VB.Form Form1
    ClientLeft      =   60
    ClientTop       =   510
    ClientWidth     =   6450
+   Icon            =   "Form1.frx":0000
    LinkMode        =   1  'Source
    LinkTopic       =   "sliver"
    ScaleHeight     =   1290
@@ -12,11 +13,11 @@ Begin VB.Form Form1
    StartUpPosition =   2  'ÆÁÄ»ÖÐÐÄ
    Begin VB.TextBox Text1 
       Height          =   270
-      Left            =   900
+      Left            =   990
       TabIndex        =   6
       Text            =   "2"
       Top             =   765
-      Width           =   675
+      Width           =   585
    End
    Begin VB.TextBox data4 
       Height          =   375
@@ -59,26 +60,41 @@ Begin VB.Form Form1
    Begin VB.CommandButton Command1 
       Caption         =   "Start"
       Height          =   375
-      Left            =   2655
+      Left            =   3360
       TabIndex        =   0
       Top             =   765
       Width           =   1095
    End
+   Begin VB.Label Label4 
+      Height          =   255
+      Left            =   2700
+      TabIndex        =   9
+      Top             =   810
+      Width           =   465
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Type:"
+      Height          =   255
+      Left            =   2160
+      TabIndex        =   8
+      Top             =   810
+      Width           =   465
+   End
    Begin VB.Label Label2 
       Caption         =   "s"
       Height          =   255
-      Left            =   1665
+      Left            =   1710
       TabIndex        =   7
       Top             =   810
       Width           =   255
    End
    Begin VB.Label Label1 
-      Caption         =   "Interval"
+      Caption         =   "Interval:"
       Height          =   255
       Left            =   120
       TabIndex        =   5
       Top             =   810
-      Width           =   735
+      Width           =   825
    End
 End
 Attribute VB_Name = "Form1"
@@ -87,7 +103,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-
+Private Const url As String = "http://ls.lzjgold-dg.com/getact.php"
 Private Sub Command1_Click()
     On Error Resume Next
     If Command1.Caption = "Start" Then
@@ -106,10 +122,7 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Timer1_Timer()
-    Static i As Integer
-    i = i + 1
-    data1.Text = Str(i)
-    data2.Text = XMLHttpRequest("GET", "http://127.0.0.1/test.php", "")
+    handleResponse XMLHttpRequest("GET", url, "")
 End Sub
 
 Private Function XMLHttpRequest(ByVal XmlHttpMode, ByVal XmlHttpUrl, ByVal XmlHttpData)
@@ -127,10 +140,28 @@ Private Function XMLHttpRequest(ByVal XmlHttpMode, ByVal XmlHttpUrl, ByVal XmlHt
         .waitForResponse
         If MyXmlHttp.Status = 200 Then
             XMLHttpRequest = .responseText
-            Debug.Print .responseText
+            'Debug.Print .responseText
         Else
             XMLHttpRequest = ""
         End If
     End With
     Set MyXmlHttp = Nothing
+End Function
+
+Private Function handleResponse(ByVal strResult)
+    Dim res() As String
+    Dim first() As String
+    On Error Resume Next
+    If strResult = "" Then
+        Exit Function
+    Else
+        strResult = Replace(strResult, """", "")
+    End If
+    res() = Split(strResult, ",")
+    first() = Split(res(0), ":")
+    data1.Text = first(1)
+    data2.Text = res(1)
+    data3.Text = res(2)
+    data4.Text = res(3)
+    Label4.Caption = first(0)
 End Function

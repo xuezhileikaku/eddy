@@ -1,6 +1,6 @@
 Type=Exe
 Form=Form1.frm
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\WINDOWS\system32\stdole2.tlb#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\stdole2.tlb#OLE Automation
 IconForm="Form1"
 Startup="Form1"
 HelpFile=""
@@ -15,6 +15,7 @@ MinorVer=0
 RevisionVer=0
 AutoIncrementVer=0
 ServerSupportFiles=0
+VersionCompanyName="eddy"
 VersionLegalCopyright="eddy"
 CompilationType=0
 OptimizationType=0
@@ -35,6 +36,7 @@ DebugStartupOption=0
 
 [MS Transaction Server]
 AutoRefresh=1
+
 [AmicForVB]
 XPSTYLE=0
 DLLOUT=0
