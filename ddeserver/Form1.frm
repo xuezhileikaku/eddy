@@ -23,7 +23,7 @@ Begin VB.Form Form1
       Height          =   270
       Left            =   990
       TabIndex        =   6
-      Text            =   "2"
+      Text            =   "1000"
       Top             =   765
       Width           =   585
    End
@@ -105,7 +105,7 @@ Begin VB.Form Form1
       Width           =   465
    End
    Begin VB.Label Label2 
-      Caption         =   "s"
+      Caption         =   "ms"
       Height          =   255
       Left            =   1710
       TabIndex        =   7
@@ -134,11 +134,11 @@ Private Sub Command1_Click()
         Label6.Caption = "server is running..."
         Command1.Caption = "Stop"
         url = Trim(Text2.Text)
-        If Val(Text1.Text) < 0.5 Or Val(Text1.Text) > 100 Then
+        If Val(Text1.Text) < 100 Or Val(Text1.Text) > 100000 Then
             MsgBox "时间间隔设置过短或过长", vbOKOnly
-            Text1.Text = Str(2)
+            Text1.Text = Trim(Str(1000))
         End If
-        Timer1.Interval = 1000 * Val(Text1.Text)
+        Timer1.Interval = Val(Text1.Text)
         Timer1.Enabled = True
     Else
         Timer1.Enabled = False
