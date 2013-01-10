@@ -62,7 +62,7 @@ Begin VB.Form Form1
    Begin VB.Timer Timer1 
       Enabled         =   0   'False
       Interval        =   2000
-      Left            =   4275
+      Left            =   2925
       Top             =   720
    End
    Begin VB.CommandButton Command1 
@@ -74,12 +74,12 @@ Begin VB.Form Form1
       Width           =   1095
    End
    Begin VB.Label Label6 
-      Caption         =   "Label6"
+      Caption         =   "server status"
       Height          =   240
-      Left            =   4905
+      Left            =   3330
       TabIndex        =   12
       Top             =   810
-      Width           =   1500
+      Width           =   3075
    End
    Begin VB.Label Label5 
       Caption         =   "Address:"
