@@ -1,16 +1,24 @@
 VERSION 5.00
 Begin VB.Form Form1 
    Caption         =   "Server"
-   ClientHeight    =   1290
+   ClientHeight    =   1560
    ClientLeft      =   60
    ClientTop       =   510
    ClientWidth     =   6450
    Icon            =   "Form1.frx":0000
    LinkMode        =   1  'Source
    LinkTopic       =   "sliver"
-   ScaleHeight     =   1290
+   ScaleHeight     =   1560
    ScaleWidth      =   6450
    StartUpPosition =   2  '屏幕中心
+   Begin VB.TextBox Text2 
+      Height          =   285
+      Left            =   990
+      TabIndex        =   11
+      Text            =   "http://ls.lzjgold-dg.com/getact.php"
+      Top             =   1170
+      Width           =   3795
+   End
    Begin VB.TextBox Text1 
       Height          =   270
       Left            =   990
@@ -54,16 +62,32 @@ Begin VB.Form Form1
    Begin VB.Timer Timer1 
       Enabled         =   0   'False
       Interval        =   2000
-      Left            =   5160
-      Top             =   840
+      Left            =   4275
+      Top             =   720
    End
    Begin VB.CommandButton Command1 
       Caption         =   "Start"
       Height          =   375
-      Left            =   3360
+      Left            =   5265
       TabIndex        =   0
-      Top             =   765
+      Top             =   1170
       Width           =   1095
+   End
+   Begin VB.Label Label6 
+      Caption         =   "Label6"
+      Height          =   240
+      Left            =   4905
+      TabIndex        =   12
+      Top             =   810
+      Width           =   1500
+   End
+   Begin VB.Label Label5 
+      Caption         =   "Address:"
+      Height          =   285
+      Left            =   135
+      TabIndex        =   10
+      Top             =   1215
+      Width           =   735
    End
    Begin VB.Label Label4 
       Height          =   255
@@ -103,21 +127,23 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Private Const url As String = "http://ls.lzjgold-dg.com/getact.php"
+Private url As String
 Private Sub Command1_Click()
     On Error Resume Next
     If Command1.Caption = "Start" Then
-        Timer1.Enabled = True
+        Label6.Caption = "server is running..."
         Command1.Caption = "Stop"
-        If Val(Text1.Text) < 1 Then
-            MsgBox "时间间隔设置过短", vbOKOnly
-            Text1.Text = Str(3)
-        Else
-            Timer1.Interval = 1000 * Val(Text1.Text)
+        url = Trim(Text2.Text)
+        If Val(Text1.Text) < 0.5 Or Val(Text1.Text) > 100 Then
+            MsgBox "时间间隔设置过短或过长", vbOKOnly
+            Text1.Text = Str(2)
         End If
+        Timer1.Interval = 1000 * Val(Text1.Text)
+        Timer1.Enabled = True
     Else
         Timer1.Enabled = False
         Command1.Caption = "Start"
+        Label6.Caption = "server stoped"
     End If
 End Sub
 
