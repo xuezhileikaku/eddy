@@ -120,15 +120,15 @@ if($bRet){
             $conn = mysql_connect('127.0.0.1','root','yiyiyi');
             mysql_select_db('yeepay');
             mysql_query('set names gbk');
-            $sql = "select id from jyzbpme where order = '" . $r2_TrxId . "'";
+            $sql = "select * from jyzbpme where orderNum = '" . trim($r2_TrxId) . "'";
             $result = mysql_query($sql);
-            $n=mysql_num_rows($result);
-            echo $n;
-            mysql_close($conn);
-            if($result!=false){
+            $row = mysql_fetch_array($result);
+            if($row){
                 //订单已处理，退出
+                mysql_close($conn);
                 exit();
             }
+            
             //与MT4服务器通信
 			$encryptionKey = "asfas1";
 			$secretHash = "fsdvgfygfsddsag";
@@ -177,8 +177,11 @@ if($bRet){
                     $conn = mysql_connect('127.0.0.1','root','yiyiyi');
                     mysql_select_db('yeepay');
                     mysql_query('set names gbk');
-                    $sql = "insert into jyzbpme values (0 , '" . $r2_TrxId . "')";
-                    mysql_query($sql);
+                    $sql = "insert into jyzbpme values (0 , '" . trim($r2_TrxId) . "')";
+                    $r = mysql_query($sql);
+                    if(!$r){
+                        $status .="订单信息写入数据库失败，可能会出现重复入金，请检查";
+                    }
                     mysql_close($conn);
 					////////////////////////////////////////////////////////////////////////////////////////////
 					/*
