@@ -19,7 +19,7 @@ if($bRet){
 	if($r1_Code=="1"){	
 		if($r9_BType=="1"){
 			echo "交易成功";
-			echo  "<br />在线支付页面返回<br />";
+			echo  "<br />在线支付页面返回，请查看交易账户是否已入金成功，如有疑问，请联系管理员<br />";
             /*
 			//与MT4服务器通信
 			$encryptionKey = "asfas1";
@@ -120,7 +120,7 @@ if($bRet){
             $conn = mysql_connect('127.0.0.1','root','yiyiyi');
             mysql_select_db('yeepay');
             mysql_query('set names gbk');
-            $sql = "select * from jyzbpme where orderNum = '" . trim($r2_TrxId) . "'";
+            $sql = "select * from baisheng where orderNum = '" . trim($r2_TrxId) . "'";
             $result = mysql_query($sql);
             $row = mysql_fetch_array($result);
             if($row){
@@ -128,6 +128,17 @@ if($bRet){
                 mysql_close($conn);
                 exit();
             }
+
+			//处理订单，写入数据库
+            //$conn = mysql_connect('127.0.0.1','root','yiyiyi');
+            //mysql_select_db('yeepay');
+            //mysql_query('set names gbk');
+            $sql = "insert into baisheng values (0 , '" . trim($r2_TrxId) . "')";
+            $r = mysql_query($sql);
+            if(!$r){
+                  $status .="订单信息写入数据库失败，可能会出现重复入金，请检查";
+            }
+            mysql_close($conn);
             
             //与MT4服务器通信
 			$encryptionKey = "asfas1";
@@ -164,6 +175,8 @@ if($bRet){
 				$status .= "与MT4服务器通信失败，本次入金未更新至账户，请手动处理。\r\n";
 			}else{	
 				//更新账户余额
+				$params['login'] = $r5_Pid;
+				$params['value'] = round($r3_Amt/7,2);
 				$params['comment'] = "change account balance from yeepay";
 				$answerData = $mt4request->MakeRequest("changebalance", $params);
 				if($answerData == 'Fail!'){
@@ -172,17 +185,6 @@ if($bRet){
 				}else{
 					//echo '更新交易账户余额成功。本次入金：$'.$r3_Amt.'<br />';
 					$status .= "更新交易账户余额成功。\r\n";
-					$mt4request->CloseConnection();
-					//处理订单，写入数据库
-                    $conn = mysql_connect('127.0.0.1','root','yiyiyi');
-                    mysql_select_db('yeepay');
-                    mysql_query('set names gbk');
-                    $sql = "insert into jyzbpme values (0 , '" . trim($r2_TrxId) . "')";
-                    $r = mysql_query($sql);
-                    if(!$r){
-                        $status .="订单信息写入数据库失败，可能会出现重复入金，请检查";
-                    }
-                    mysql_close($conn);
 					////////////////////////////////////////////////////////////////////////////////////////////
 					/*
                     $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
@@ -201,6 +203,7 @@ if($bRet){
 					}
 					$mt4request->CloseConnection();*/
 				}
+				$mt4request->CloseConnection();
 			}
 
 			//发送邮件通知
@@ -217,7 +220,7 @@ if($bRet){
 				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
 				$mail->From       = "yiyiyitest@163.com";
 				$mail->FromName   = "Admin";
-				$to = "eddy@rrgod.com";
+				$to = "alarongold@163.com";
 				$mail->AddAddress($to);
 				$mail->Subject  = "在线入金通知";
 				//发送的内容
@@ -227,9 +230,9 @@ if($bRet){
 				//$mail->AddAttachment("f:/test.png");  //可以添加附件
 				$mail->IsHTML(false); 
 				$mail->Send();
-				echo '在线入金通知邮件已发送至管理员邮箱。';
+				//echo '在线入金通知邮件已发送至管理员邮箱。';
 			} catch (phpmailerException $e) {
-				echo "在线入金通知邮件发送失败：".$e->errorMessage();
+				//echo "在线入金通知邮件发送失败：".$e->errorMessage();
 			}
 		}
 	}
