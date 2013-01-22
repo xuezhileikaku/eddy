@@ -1,0 +1,83 @@
+本章将帮助你学习Yii框架中关于URL路由、控制器和视图的一些有用的知识。学习完你可以更加灵活的运用控制器和视图。
+
+配置URL规则
+
+Yii URL路由是非常强大的，它主要完成两个功能：一是解析URL到内部路由，而是根据这些内部路由创建URL。路由规则的描述分散在Yii官方文档和API文档中。让我们通过一个例子来学习如何配置应用程序的路由规则。
+
+开始
+1.在Yii官方教程中描述了如何用yiic webapp(http://www.yiiframework.com/doc/guide/)命令创建一个新的Yii应用程序。找到文件your protected/config/main.php，应包含如下代码：
+// application components
+'components'=>array(
+	…
+	// uncomment the following to enable URLs in path-format
+	/*
+	'urlManager'=>array(
+		'urlFormat'=>'path',
+		'rules'=>array(
+		'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+		'<controller:\w+>/<action:\w+>/<id:\
+		d+>'=>'<controller>/<action>',
+		'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+		),
+	),
+2.删除rules中的内容，我们从头开始配置。
+3.在protected/controllers目录下，创建WebsiteController.php文件，写入如下代码：
+class WebsiteController extends CController
+{
+	public function actionIndex()
+	{
+		echo "index";
+	}
+	public function actionPage($alias)
+	{
+		echo "Page is $alias.";
+	}
+}
+此为应用程序的控制器，我们将个性化其URL。
+4.配置应用程序服务器一使用干净的URLs。如果你的服务器是Apache，开启了mod_rewrite模块且AllowOverride设置为on，那么你需要在webroot根目录下的.htaccess文件中添加以下代码：
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+如何做……
+我们的网站应该在/home显示主页（index页面），/page/<alias_here>显示其他页面。另外，/bout应该指向page页面（alias为about）。
+	1.在protected/config/main.php配置文件中添加如下规则：
+		'home' => 'website/index',
+		'<alias:about>' => 'website/page',
+		'page/<alias>' => 'website/page',
+	2.保存配置，你应该可以浏览以下URLs：
+		/home
+		/about
+		/page/about
+		/page/test
+	浏览http://server.local/about，应该显示如下：
+	Page is about.
+
+	<译者注：/home实际上是/website/index
+			/about实际上是/website/page/alias/about
+			/page/about实际上是/website/page/alias/about
+			/page/test实际上是/website/page/alias/test>
+如何工作的？
+让我们看看做了什么，问什么会这样。我们先看看第一条规则：
+	'home' => 'website/index',
+
+'website/index代表什么呢？
+在Yii应用程序中，每一个控制器和对应的动作都有相关联的内部路由。一个格式化的内部路由就是moduleID/controllerID/actionID。例如，WebsiteController的actionPage方法的路由为website/page。因此，为了得到控制器ID，你应该将控制器类名称去掉Controller后缀并且使第一个字母小写。为了获取动作ID，你应该将动作方法名去掉action前缀并使第一个字母小写。
+那么，home是什么呢？
+为了更好的理解它，我们需要知道应用不同的URLs其访问应用程序都发生了些什么。
+当我们用/home访问时，URL路由器自顶至下检查我们的路由规则，并尝试去匹配我们输入的URL。
+如果匹配成功，路由器会获取到此条规则对应的控制器和动作，并执行它。因此，/home是一个URL模式，它定义了哪些URLs将被此条规则处理。
+	[备注：规则越少，那么匹配次数就越少，意味着性能也会更好。]
+
+更多……
+你可以用一个特别的语法规则来创建参数化的规则。让我们看看第三天规则：
+	'page/<alias>' => 'website/page',
+我们定义了一个alias参数，此参数应该是在/page/后被指定。它可以是任何值，此值会被当做$alias参数传递给WebsiteController::actionPage($alias)。
+你也可以为此参数定义一个模式。在第二天规则中就是这么做的：
+	'<alias:about>' => 'website/page',
+这里的alias应该匹配about或其他值，否则规则不会被应用。
