@@ -1,14 +1,14 @@
-±¾ÕÂ½«°ïÖúÄãÑ§Ï°Yii¿ò¼ÜÖÐ¹ØÓÚURLÂ·ÓÉ¡¢¿ØÖÆÆ÷ºÍÊÓÍ¼µÄÒ»Ð©ÓÐÓÃµÄÖªÊ¶¡£Ñ§Ï°ÍêÄã¿ÉÒÔ¸ü¼ÓÁé»îµÄÔËÓÃ¿ØÖÆÆ÷ºÍÊÓÍ¼¡£
+æœ¬ç« å°†å¸®åŠ©ä½ å­¦ä¹ Yiiæ¡†æž¶ä¸­å…³äºŽURLè·¯ç”±ã€æŽ§åˆ¶å™¨å’Œè§†å›¾çš„ä¸€äº›æœ‰ç”¨çš„çŸ¥è¯†ã€‚å­¦ä¹ å®Œä½ å¯ä»¥æ›´åŠ çµæ´»çš„è¿ç”¨æŽ§åˆ¶å™¨å’Œè§†å›¾ã€‚
 
-ÅäÖÃURL¹æÔò
+é…ç½®URLè§„åˆ™
 
-Yii URLÂ·ÓÉÊÇ·Ç³£Ç¿´óµÄ£¬ËüÖ÷ÒªÍê³ÉÁ½¸ö¹¦ÄÜ£ºÒ»ÊÇ½âÎöURLµ½ÄÚ²¿Â·ÓÉ£¬¶øÊÇ¸ù¾ÝÕâÐ©ÄÚ²¿Â·ÓÉ´´½¨URL¡£Â·ÓÉ¹æÔòµÄÃèÊö·ÖÉ¢ÔÚYii¹Ù·½ÎÄµµºÍAPIÎÄµµÖÐ¡£ÈÃÎÒÃÇÍ¨¹ýÒ»¸öÀý×ÓÀ´Ñ§Ï°ÈçºÎÅäÖÃÓ¦ÓÃ³ÌÐòµÄÂ·ÓÉ¹æÔò¡£
+Yii URLè·¯ç”±æ˜¯éžå¸¸å¼ºå¤§çš„ï¼Œå®ƒä¸»è¦å®Œæˆä¸¤ä¸ªåŠŸèƒ½ï¼šä¸€æ˜¯è§£æžURLåˆ°å†…éƒ¨è·¯ç”±ï¼Œè€Œæ˜¯æ ¹æ®è¿™äº›å†…éƒ¨è·¯ç”±åˆ›å»ºURLã€‚è·¯ç”±è§„åˆ™çš„æè¿°åˆ†æ•£åœ¨Yiiå®˜æ–¹æ–‡æ¡£å’ŒAPIæ–‡æ¡£ä¸­ã€‚è®©æˆ‘ä»¬é€šè¿‡ä¸€ä¸ªä¾‹å­æ¥å­¦ä¹ å¦‚ä½•é…ç½®åº”ç”¨ç¨‹åºçš„è·¯ç”±è§„åˆ™ã€‚
 
-¿ªÊ¼
-1.ÔÚYii¹Ù·½½Ì³ÌÖÐÃèÊöÁËÈçºÎÓÃyiic webapp(http://www.yiiframework.com/doc/guide/)ÃüÁî´´½¨Ò»¸öÐÂµÄYiiÓ¦ÓÃ³ÌÐò¡£ÕÒµ½ÎÄ¼þyour protected/config/main.php£¬Ó¦°üº¬ÈçÏÂ´úÂë£º
+å¼€å§‹
+1.åœ¨Yiiå®˜æ–¹æ•™ç¨‹ä¸­æè¿°äº†å¦‚ä½•ç”¨yiic webapp(http://www.yiiframework.com/doc/guide/)å‘½ä»¤åˆ›å»ºä¸€ä¸ªæ–°çš„Yiiåº”ç”¨ç¨‹åºã€‚æ‰¾åˆ°æ–‡ä»¶your protected/config/main.phpï¼Œåº”åŒ…å«å¦‚ä¸‹ä»£ç ï¼š
 // application components
 'components'=>array(
-	¡­
+	â€¦
 	// uncomment the following to enable URLs in path-format
 	/*
 	'urlManager'=>array(
@@ -20,8 +20,8 @@ Yii URLÂ·ÓÉÊÇ·Ç³£Ç¿´óµÄ£¬ËüÖ÷ÒªÍê³ÉÁ½¸ö¹¦ÄÜ£ºÒ»ÊÇ½âÎöURLµ½ÄÚ²¿Â·ÓÉ£¬¶øÊÇ¸ù¾ÝÕâÐ©
 		'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 		),
 	),
-2.É¾³ýrulesÖÐµÄÄÚÈÝ£¬ÎÒÃÇ´ÓÍ·¿ªÊ¼ÅäÖÃ¡£
-3.ÔÚprotected/controllersÄ¿Â¼ÏÂ£¬´´½¨WebsiteController.phpÎÄ¼þ£¬Ð´ÈëÈçÏÂ´úÂë£º
+2.åˆ é™¤rulesä¸­çš„å†…å®¹ï¼Œæˆ‘ä»¬ä»Žå¤´å¼€å§‹é…ç½®ã€‚
+3.åœ¨protected/controllersç›®å½•ä¸‹ï¼Œåˆ›å»ºWebsiteController.phpæ–‡ä»¶ï¼Œå†™å…¥å¦‚ä¸‹ä»£ç ï¼š
 class WebsiteController extends CController
 {
 	public function actionIndex()
@@ -33,8 +33,8 @@ class WebsiteController extends CController
 		echo "Page is $alias.";
 	}
 }
-´ËÎªÓ¦ÓÃ³ÌÐòµÄ¿ØÖÆÆ÷£¬ÎÒÃÇ½«¸öÐÔ»¯ÆäURL¡£
-4.ÅäÖÃÓ¦ÓÃ³ÌÐò·þÎñÆ÷Ò»Ê¹ÓÃ¸É¾»µÄURLs¡£Èç¹ûÄãµÄ·þÎñÆ÷ÊÇApache£¬¿ªÆôÁËmod_rewriteÄ£¿éÇÒAllowOverrideÉèÖÃÎªon£¬ÄÇÃ´ÄãÐèÒªÔÚwebroot¸ùÄ¿Â¼ÏÂµÄ.htaccessÎÄ¼þÖÐÌí¼ÓÒÔÏÂ´úÂë£º
+æ­¤ä¸ºåº”ç”¨ç¨‹åºçš„æŽ§åˆ¶å™¨ï¼Œæˆ‘ä»¬å°†ä¸ªæ€§åŒ–å…¶URLã€‚
+4.é…ç½®åº”ç”¨ç¨‹åºæœåŠ¡å™¨ä¸€ä½¿ç”¨å¹²å‡€çš„URLsã€‚å¦‚æžœä½ çš„æœåŠ¡å™¨æ˜¯Apacheï¼Œå¼€å¯äº†mod_rewriteæ¨¡å—ä¸”AllowOverrideè®¾ç½®ä¸ºonï¼Œé‚£ä¹ˆä½ éœ€è¦åœ¨webrootæ ¹ç›®å½•ä¸‹çš„.htaccessæ–‡ä»¶ä¸­æ·»åŠ ä»¥ä¸‹ä»£ç ï¼š
 Options +FollowSymLinks
 IndexIgnore */*
 RewriteEngine on
@@ -44,59 +44,59 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # otherwise forward it to index.php
 RewriteRule . index.php
 
-ÈçºÎ×ö¡­¡­
-ÎÒÃÇµÄÍøÕ¾Ó¦¸ÃÔÚ/homeÏÔÊ¾Ö÷Ò³£¨indexÒ³Ãæ£©£¬/page/<alias_here>ÏÔÊ¾ÆäËûÒ³Ãæ¡£ÁíÍâ£¬/boutÓ¦¸ÃÖ¸ÏòpageÒ³Ãæ£¨aliasÎªabout£©¡£
-	1.ÔÚprotected/config/main.phpÅäÖÃÎÄ¼þÖÐÌí¼ÓÈçÏÂ¹æÔò£º
+å¦‚ä½•åšâ€¦â€¦
+æˆ‘ä»¬çš„ç½‘ç«™åº”è¯¥åœ¨/homeæ˜¾ç¤ºä¸»é¡µï¼ˆindexé¡µé¢ï¼‰ï¼Œ/page/<alias_here>æ˜¾ç¤ºå…¶ä»–é¡µé¢ã€‚å¦å¤–ï¼Œ/boutåº”è¯¥æŒ‡å‘pageé¡µé¢ï¼ˆaliasä¸ºaboutï¼‰ã€‚
+	1.åœ¨protected/config/main.phpé…ç½®æ–‡ä»¶ä¸­æ·»åŠ å¦‚ä¸‹è§„åˆ™ï¼š
 		'home' => 'website/index',
 		'<alias:about>' => 'website/page',
 		'page/<alias>' => 'website/page',
-	2.±£´æÅäÖÃ£¬ÄãÓ¦¸Ã¿ÉÒÔä¯ÀÀÒÔÏÂURLs£º
+	2.ä¿å­˜é…ç½®ï¼Œä½ åº”è¯¥å¯ä»¥æµè§ˆä»¥ä¸‹URLsï¼š
 		/home
 		/about
 		/page/about
 		/page/test
-	ä¯ÀÀhttp://server.local/about£¬Ó¦¸ÃÏÔÊ¾ÈçÏÂ£º
+	æµè§ˆhttp://server.local/aboutï¼Œåº”è¯¥æ˜¾ç¤ºå¦‚ä¸‹ï¼š
 	Page is about.
 
-	<ÒëÕß×¢£º/homeÊµ¼ÊÉÏÊÇ/website/index
-			/aboutÊµ¼ÊÉÏÊÇ/website/page/alias/about
-			/page/aboutÊµ¼ÊÉÏÊÇ/website/page/alias/about
-			/page/testÊµ¼ÊÉÏÊÇ/website/page/alias/test>
-ÈçºÎ¹¤×÷µÄ£¿
-ÈÃÎÒÃÇ¿´¿´×öÁËÊ²Ã´£¬ÎÊÊ²Ã´»áÕâÑù¡£ÎÒÃÇÏÈ¿´¿´µÚÒ»Ìõ¹æÔò£º
+	<è¯‘è€…æ³¨ï¼š/homeå®žé™…ä¸Šæ˜¯/website/index
+			/aboutå®žé™…ä¸Šæ˜¯/website/page/alias/about
+			/page/aboutå®žé™…ä¸Šæ˜¯/website/page/alias/about
+			/page/testå®žé™…ä¸Šæ˜¯/website/page/alias/test>
+å¦‚ä½•å·¥ä½œçš„ï¼Ÿ
+è®©æˆ‘ä»¬çœ‹çœ‹åšäº†ä»€ä¹ˆï¼Œé—®ä»€ä¹ˆä¼šè¿™æ ·ã€‚æˆ‘ä»¬å…ˆçœ‹çœ‹ç¬¬ä¸€æ¡è§„åˆ™ï¼š
 	'home' => 'website/index',
 
-'website/index´ú±íÊ²Ã´ÄØ£¿
-ÔÚYiiÓ¦ÓÃ³ÌÐòÖÐ£¬Ã¿Ò»¸ö¿ØÖÆÆ÷ºÍ¶ÔÓ¦µÄ¶¯×÷¶¼ÓÐÏà¹ØÁªµÄÄÚ²¿Â·ÓÉ¡£Ò»¸ö¸ñÊ½»¯µÄÄÚ²¿Â·ÓÉ¾ÍÊÇmoduleID/controllerID/actionID¡£ÀýÈç£¬WebsiteControllerµÄactionPage·½·¨µÄÂ·ÓÉÎªwebsite/page¡£Òò´Ë£¬ÎªÁËµÃµ½¿ØÖÆÆ÷ID£¬ÄãÓ¦¸Ã½«¿ØÖÆÆ÷ÀàÃû³ÆÈ¥µôControllerºó×º²¢ÇÒÊ¹µÚÒ»¸ö×ÖÄ¸Ð¡Ð´¡£ÎªÁË»ñÈ¡¶¯×÷ID£¬ÄãÓ¦¸Ã½«¶¯×÷·½·¨ÃûÈ¥µôactionÇ°×º²¢Ê¹µÚÒ»¸ö×ÖÄ¸Ð¡Ð´¡£
-ÄÇÃ´£¬homeÊÇÊ²Ã´ÄØ£¿
-ÎªÁË¸üºÃµÄÀí½âËü£¬ÎÒÃÇÐèÒªÖªµÀÓ¦ÓÃ²»Í¬µÄURLsÆä·ÃÎÊÓ¦ÓÃ³ÌÐò¶¼·¢ÉúÁËÐ©Ê²Ã´¡£
-µ±ÎÒÃÇÓÃ/home·ÃÎÊÊ±£¬URLÂ·ÓÉÆ÷×Ô¶¥ÖÁÏÂ¼ì²éÎÒÃÇµÄÂ·ÓÉ¹æÔò£¬²¢³¢ÊÔÈ¥Æ¥ÅäÎÒÃÇÊäÈëµÄURL¡£
-Èç¹ûÆ¥Åä³É¹¦£¬Â·ÓÉÆ÷»á»ñÈ¡µ½´ËÌõ¹æÔò¶ÔÓ¦µÄ¿ØÖÆÆ÷ºÍ¶¯×÷£¬²¢Ö´ÐÐËü¡£Òò´Ë£¬/homeÊÇÒ»¸öURLÄ£Ê½£¬Ëü¶¨ÒåÁËÄÄÐ©URLs½«±»´ËÌõ¹æÔò´¦Àí¡£
-	[±¸×¢£º¹æÔòÔ½ÉÙ£¬ÄÇÃ´Æ¥Åä´ÎÊý¾ÍÔ½ÉÙ£¬ÒâÎ¶×ÅÐÔÄÜÒ²»á¸üºÃ¡£]
+'website/indexä»£è¡¨ä»€ä¹ˆå‘¢ï¼Ÿ
+åœ¨Yiiåº”ç”¨ç¨‹åºä¸­ï¼Œæ¯ä¸€ä¸ªæŽ§åˆ¶å™¨å’Œå¯¹åº”çš„åŠ¨ä½œéƒ½æœ‰ç›¸å…³è”çš„å†…éƒ¨è·¯ç”±ã€‚ä¸€ä¸ªæ ¼å¼åŒ–çš„å†…éƒ¨è·¯ç”±å°±æ˜¯moduleID/controllerID/actionIDã€‚ä¾‹å¦‚ï¼ŒWebsiteControllerçš„actionPageæ–¹æ³•çš„è·¯ç”±ä¸ºwebsite/pageã€‚å› æ­¤ï¼Œä¸ºäº†å¾—åˆ°æŽ§åˆ¶å™¨IDï¼Œä½ åº”è¯¥å°†æŽ§åˆ¶å™¨ç±»åç§°åŽ»æŽ‰ControlleråŽç¼€å¹¶ä¸”ä½¿ç¬¬ä¸€ä¸ªå­—æ¯å°å†™ã€‚ä¸ºäº†èŽ·å–åŠ¨ä½œIDï¼Œä½ åº”è¯¥å°†åŠ¨ä½œæ–¹æ³•ååŽ»æŽ‰actionå‰ç¼€å¹¶ä½¿ç¬¬ä¸€ä¸ªå­—æ¯å°å†™ã€‚
+é‚£ä¹ˆï¼Œhomeæ˜¯ä»€ä¹ˆå‘¢ï¼Ÿ
+ä¸ºäº†æ›´å¥½çš„ç†è§£å®ƒï¼Œæˆ‘ä»¬éœ€è¦çŸ¥é“åº”ç”¨ä¸åŒçš„URLså…¶è®¿é—®åº”ç”¨ç¨‹åºéƒ½å‘ç”Ÿäº†äº›ä»€ä¹ˆã€‚
+å½“æˆ‘ä»¬ç”¨/homeè®¿é—®æ—¶ï¼ŒURLè·¯ç”±å™¨è‡ªé¡¶è‡³ä¸‹æ£€æŸ¥æˆ‘ä»¬çš„è·¯ç”±è§„åˆ™ï¼Œå¹¶å°è¯•åŽ»åŒ¹é…æˆ‘ä»¬è¾“å…¥çš„URLã€‚
+å¦‚æžœåŒ¹é…æˆåŠŸï¼Œè·¯ç”±å™¨ä¼šèŽ·å–åˆ°æ­¤æ¡è§„åˆ™å¯¹åº”çš„æŽ§åˆ¶å™¨å’ŒåŠ¨ä½œï¼Œå¹¶æ‰§è¡Œå®ƒã€‚å› æ­¤ï¼Œ/homeæ˜¯ä¸€ä¸ªURLæ¨¡å¼ï¼Œå®ƒå®šä¹‰äº†å“ªäº›URLså°†è¢«æ­¤æ¡è§„åˆ™å¤„ç†ã€‚
+	[å¤‡æ³¨ï¼šè§„åˆ™è¶Šå°‘ï¼Œé‚£ä¹ˆåŒ¹é…æ¬¡æ•°å°±è¶Šå°‘ï¼Œæ„å‘³ç€æ€§èƒ½ä¹Ÿä¼šæ›´å¥½ã€‚]
 
-¸ü¶à¡­¡­
-Äã¿ÉÒÔÓÃÒ»¸öÌØ±ðµÄÓï·¨¹æÔòÀ´´´½¨²ÎÊý»¯µÄ¹æÔò¡£ÈÃÎÒÃÇ¿´¿´µÚÈýÌì¹æÔò£º
+æ›´å¤šâ€¦â€¦
+ä½ å¯ä»¥ç”¨ä¸€ä¸ªç‰¹åˆ«çš„è¯­æ³•è§„åˆ™æ¥åˆ›å»ºå‚æ•°åŒ–çš„è§„åˆ™ã€‚è®©æˆ‘ä»¬çœ‹çœ‹ç¬¬ä¸‰å¤©è§„åˆ™ï¼š
 	'page/<alias>' => 'website/page',
-ÎÒÃÇ¶¨ÒåÁËÒ»¸öalias²ÎÊý£¬´Ë²ÎÊýÓ¦¸ÃÊÇÔÚ/page/ºó±»Ö¸¶¨¡£Ëü¿ÉÒÔÊÇÈÎºÎÖµ£¬´ËÖµ»á±»µ±×ö$alias²ÎÊý´«µÝ¸øWebsiteController::actionPage($alias)¡£
-ÄãÒ²¿ÉÒÔÎª´Ë²ÎÊý¶¨ÒåÒ»¸öÄ£Ê½¡£ÔÚµÚ¶þÌì¹æÔòÖÐ¾ÍÊÇÕâÃ´×öµÄ£º
+æˆ‘ä»¬å®šä¹‰äº†ä¸€ä¸ªaliaså‚æ•°ï¼Œæ­¤å‚æ•°åº”è¯¥æ˜¯åœ¨/page/åŽè¢«æŒ‡å®šã€‚å®ƒå¯ä»¥æ˜¯ä»»ä½•å€¼ï¼Œæ­¤å€¼ä¼šè¢«å½“åš$aliaså‚æ•°ä¼ é€’ç»™WebsiteController::actionPage($alias)ã€‚
+ä½ ä¹Ÿå¯ä»¥ä¸ºæ­¤å‚æ•°å®šä¹‰ä¸€ä¸ªæ¨¡å¼ã€‚åœ¨ç¬¬äºŒå¤©è§„åˆ™ä¸­å°±æ˜¯è¿™ä¹ˆåšçš„ï¼š
 	'<alias:about>' => 'website/page',
-ÕâÀïµÄaliasÓ¦¸ÃÆ¥Åäabout»òÆäËûÖµ£¬·ñÔò¹æÔò²»»á±»Ó¦ÓÃ¡£
+è¿™é‡Œçš„aliasåº”è¯¥åŒ¹é…aboutæˆ–å…¶ä»–å€¼ï¼Œå¦åˆ™è§„åˆ™ä¸ä¼šè¢«åº”ç”¨ã€‚
 
-ÑÓÉúÔÄ¶Á
-²Î¿¼¸ü¶àÐÅÏ¢£¬Çë²éÔÄÒÔÏÂµØÖ·£º
+å»¶ç”Ÿé˜…è¯»
+å‚è€ƒæ›´å¤šä¿¡æ¯ï¼Œè¯·æŸ¥é˜…ä»¥ä¸‹åœ°å€ï¼š
 http://www.yiiframework.com/doc/guide/en/basics.controller
 http://www.yiiframework.com/doc/guide/en/topics.url
 http://www.yiiframework.com/doc/api/1.1/CUrlManager
 
-Í¨¹ýÂ·¾¶Éú³ÉURLs
-Yii²»½öÔÊÐíÄãÍ¨¹ýURLsÂ·ÓÉµ½²»Í¬µÄ¿ØÖÆÆ÷ºÍ¶¯×÷£¬Ò²ÔÊÐíÍ¨¹ýÖ¸¶¨ÄÚ²¿µÄÂ·ÓÉºÍ²ÎÊýÀ´Éú³ÉURL¡£ÕâÊÇºÜÓÐÓÃµÄÒ»¸ö¹¦ÄÜ£¬ÒòÎªÕâ¿ÉÒÔÈÃÄãÔÚ¿ª·¢Ó¦ÓÃ³ÌÐòÊ±Ö»ÐèÒª°Ñ¾«Á¦¼¯ÖÐÔÚÄÚ²¿Â·ÓÉÉÏ£¬¶þÎÞÐè¹ØÐÄÕæÊµµÄURLs¡£
-	[±¸×¢£º²»ÒªÖ±½ÓÖ¸¶¨URLs£¬¶øÒªÓÃYii URL¹¤¾ß¡£Õâ»áÈÃÄãÔÚÐÞ¸ÄURLsÊ±Ê¡È¥ÖØÐ´¸ü¶à´úÂë]
+é€šè¿‡è·¯å¾„ç”ŸæˆURLs
+Yiiä¸ä»…å…è®¸ä½ é€šè¿‡URLsè·¯ç”±åˆ°ä¸åŒçš„æŽ§åˆ¶å™¨å’ŒåŠ¨ä½œï¼Œä¹Ÿå…è®¸é€šè¿‡æŒ‡å®šå†…éƒ¨çš„è·¯ç”±å’Œå‚æ•°æ¥ç”ŸæˆURLã€‚è¿™æ˜¯å¾ˆæœ‰ç”¨çš„ä¸€ä¸ªåŠŸèƒ½ï¼Œå› ä¸ºè¿™å¯ä»¥è®©ä½ åœ¨å¼€å‘åº”ç”¨ç¨‹åºæ—¶åªéœ€è¦æŠŠç²¾åŠ›é›†ä¸­åœ¨å†…éƒ¨è·¯ç”±ä¸Šï¼ŒäºŒæ— éœ€å…³å¿ƒçœŸå®žçš„URLsã€‚
+	[å¤‡æ³¨ï¼šä¸è¦ç›´æŽ¥æŒ‡å®šURLsï¼Œè€Œè¦ç”¨Yii URLå·¥å…·ã€‚è¿™ä¼šè®©ä½ åœ¨ä¿®æ”¹URLsæ—¶çœåŽ»é‡å†™æ›´å¤šä»£ç ]
 
-¿ªÊ¼°É
-1.ÓÃyiic webappÃüÁî´´½¨Ò»¸öÐÂµÄYiiÓ¦ÓÃ³ÌÐò£¬ÕÒµ½protected/config/main.phpÎÄ¼þ£¬Ìæ»»¹æÔòÊý×éÈçÏÂ£º
+å¼€å§‹å§
+1.ç”¨yiic webappå‘½ä»¤åˆ›å»ºä¸€ä¸ªæ–°çš„Yiiåº”ç”¨ç¨‹åºï¼Œæ‰¾åˆ°protected/config/main.phpæ–‡ä»¶ï¼Œæ›¿æ¢è§„åˆ™æ•°ç»„å¦‚ä¸‹ï¼š
 	// application components
 	'components'=>array(
-		¡­
+		â€¦
 		// uncomment the following to enable URLs in path-format
 		/*
 			'urlManager'=>array(
@@ -106,7 +106,7 @@ Yii²»½öÔÊÐíÄãÍ¨¹ýURLsÂ·ÓÉµ½²»Í¬µÄ¿ØÖÆÆ÷ºÍ¶¯×÷£¬Ò²ÔÊÐíÍ¨¹ýÖ¸¶¨ÄÚ²¿µÄÂ·ÓÉºÍ²ÎÊýÀ´É
 					'page/about/<alias:authors>' => 'website/page',
 					'page/<alias>' => 'website/page',
 		),
-2.ÔÚprotected/controllersÄ¿Â¼ÏÂ£¬´´½¨WebsiteController.phpÎÄ¼þ£¬Ð´ÈëÈçÏÂ´úÂë£º
+2.åœ¨protected/controllersç›®å½•ä¸‹ï¼Œåˆ›å»ºWebsiteController.phpæ–‡ä»¶ï¼Œå†™å…¥å¦‚ä¸‹ä»£ç ï¼š
 class WebsiteController extends CController
 {
 	public function actionIndex()
@@ -118,8 +118,8 @@ class WebsiteController extends CController
 		echo "Page is $alias.";
 	}
 }
-´ËÎªÓ¦ÓÃ³ÌÐòµÄ¿ØÖÆÆ÷£¬ÎÒÃÇÎªÆä´´Ôì¸öÐÔ»¯µÄURL¡£
-3.ÅäÖÃÓ¦ÓÃ³ÌÐò·þÎñÆ÷Ò»Ê¹ÓÃ¸É¾»µÄURLs¡£Èç¹ûÄãµÄ·þÎñÆ÷ÊÇApache£¬¿ªÆôÁËmod_rewriteÄ£¿éÇÒAllowOverrideÉèÖÃÎªon£¬ÄÇÃ´ÄãÐèÒªÔÚwebroot¸ùÄ¿Â¼ÏÂµÄ.htaccessÎÄ¼þÖÐÌí¼ÓÒÔÏÂ´úÂë£º
+æ­¤ä¸ºåº”ç”¨ç¨‹åºçš„æŽ§åˆ¶å™¨ï¼Œæˆ‘ä»¬ä¸ºå…¶åˆ›é€ ä¸ªæ€§åŒ–çš„URLã€‚
+3.é…ç½®åº”ç”¨ç¨‹åºæœåŠ¡å™¨ä¸€ä½¿ç”¨å¹²å‡€çš„URLsã€‚å¦‚æžœä½ çš„æœåŠ¡å™¨æ˜¯Apacheï¼Œå¼€å¯äº†mod_rewriteæ¨¡å—ä¸”AllowOverrideè®¾ç½®ä¸ºonï¼Œé‚£ä¹ˆä½ éœ€è¦åœ¨webrootæ ¹ç›®å½•ä¸‹çš„.htaccessæ–‡ä»¶ä¸­æ·»åŠ ä»¥ä¸‹ä»£ç ï¼š
 Options +FollowSymLinks
 IndexIgnore */*
 RewriteEngine on
@@ -129,17 +129,17 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # otherwise forward it to index.php
 RewriteRule . index.php
 
-ÈçºÎ×ö¡­¡­
-ÎÒÃÇÐèÒªÉú³ÉURLsÖ¸ÏòWebsiteControllerµÄindexºÍpage¶¯×÷¡£ÓÐ¼¸ÖÖ²»Í¬µÄ·½Ê½È¥ÊµÏÖ£¬ÕâÈ¡¾öÓÚÎÒÃÇÔÚÄÄÐèÒªËü£¬µ«»ù±¾Ô­Àí¶¼ÊÇÒ»¸öµÄ¡£ÈÃÎÒÃÇÁÐ³öÒ»Ð©Éú³ÉURLsµÄ·½·¨¡£
-CHtml::link()ºÍÆäËûCHtml·½·¨£¬ÀýÈçform¡¢refreshºÍajaxLinkµÈ¶¼¿ÉÒÔÓÃÀ´Éú³ÉURL£¬ËüÃÇ¾­³£ÔÚÊÓÍ¼ÖÐ±»Ê¹ÓÃ¡£YiiÄÚ²¿ÓÃCHtml::normalizeUrlÀ´½âÎöÄÚ²¿Â·ÓÉ¡£Òò´Ë£¬ÄãÓ¦¸Ã°´ÒÔÏÂ¸ñÊ½´«²Î¸øÕâÐ©·½·¨£º
-	URL×Ö·û´®£ºÔÚÕâÖÖÇé¿öÏÂ£¬URLÖ±½Ó±»Ê¹ÓÃ¡£
-	array(internal route, param => value, param => value, ¡­)¡£´ËÖÖÇé¿öÏÂ£¬URL½«±»Éú³É¡£
-Ê²Ã´ÊÇÄÚ²¿Â·ÓÉ£¿Ã¿Ò»¸ö¿ØÖÆÆ÷ºÍËüµÄ¶¯×÷·½·¨¶¼ÓÐÏà¹ØµÄÂ·ÓÉ¡£Ò»¸ö¸ñÊ½»¯µÄÂ·ÓÉÊÇÕâÑùµÄ£ºmoduleID/controllerID/actionID¡£ÀýÈçWebsiteControllerµÄactionPage·½·¨¶ÔÓ¦µÄÂ·ÓÉÎªwebsite/page¡£Òò´Ë£¬ÎªÁËµÃµ½¿ØÖÆÆ÷ID£¬ÄãÓ¦¸Ã½«¿ØÖÆÆ÷ÀàÃû³ÆÈ¥µôControllerºó×º²¢ÇÒÊ¹µÚÒ»¸ö×ÖÄ¸Ð¡Ð´¡£ÎªÁË»ñÈ¡¶¯×÷ID£¬ÄãÓ¦¸Ã½«¶¯×÷·½·¨ÃûÈ¥µôactionÇ°×º²¢Ê¹µÚÒ»¸ö×ÖÄ¸Ð¡Ð´¡£
-$_GET±äÁ¿´«µÝµÄ²ÎÊý»á±»´«µÝ¸øÖ¸¶¨µÄÄÚ²¿Â·ÓÉ¶¯×÷¡£ÀýÈç£¬Èç¹ûÎÒÃÇÏë´´½¨Ò»¸öURLÖ¸ÏòWebsiteController::actionIndex£¬²¢´«µÝ²ÎÊý$_GET['name']¸øËü£¬ÎÒÃÇ¿ÉÒÔÕâÑùÀ´×ö£º
+å¦‚ä½•åšâ€¦â€¦
+æˆ‘ä»¬éœ€è¦ç”ŸæˆURLsæŒ‡å‘WebsiteControllerçš„indexå’ŒpageåŠ¨ä½œã€‚æœ‰å‡ ç§ä¸åŒçš„æ–¹å¼åŽ»å®žçŽ°ï¼Œè¿™å–å†³äºŽæˆ‘ä»¬åœ¨å“ªéœ€è¦å®ƒï¼Œä½†åŸºæœ¬åŽŸç†éƒ½æ˜¯ä¸€ä¸ªçš„ã€‚è®©æˆ‘ä»¬åˆ—å‡ºä¸€äº›ç”ŸæˆURLsçš„æ–¹æ³•ã€‚
+CHtml::link()å’Œå…¶ä»–CHtmlæ–¹æ³•ï¼Œä¾‹å¦‚formã€refreshå’ŒajaxLinkç­‰éƒ½å¯ä»¥ç”¨æ¥ç”ŸæˆURLï¼Œå®ƒä»¬ç»å¸¸åœ¨è§†å›¾ä¸­è¢«ä½¿ç”¨ã€‚Yiiå†…éƒ¨ç”¨CHtml::normalizeUrlæ¥è§£æžå†…éƒ¨è·¯ç”±ã€‚å› æ­¤ï¼Œä½ åº”è¯¥æŒ‰ä»¥ä¸‹æ ¼å¼ä¼ å‚ç»™è¿™äº›æ–¹æ³•ï¼š
+	URLå­—ç¬¦ä¸²ï¼šåœ¨è¿™ç§æƒ…å†µä¸‹ï¼ŒURLç›´æŽ¥è¢«ä½¿ç”¨ã€‚
+	array(internal route, param => value, param => value, â€¦)ã€‚æ­¤ç§æƒ…å†µä¸‹ï¼ŒURLå°†è¢«ç”Ÿæˆã€‚
+ä»€ä¹ˆæ˜¯å†…éƒ¨è·¯ç”±ï¼Ÿæ¯ä¸€ä¸ªæŽ§åˆ¶å™¨å’Œå®ƒçš„åŠ¨ä½œæ–¹æ³•éƒ½æœ‰ç›¸å…³çš„è·¯ç”±ã€‚ä¸€ä¸ªæ ¼å¼åŒ–çš„è·¯ç”±æ˜¯è¿™æ ·çš„ï¼šmoduleID/controllerID/actionIDã€‚ä¾‹å¦‚WebsiteControllerçš„actionPageæ–¹æ³•å¯¹åº”çš„è·¯ç”±ä¸ºwebsite/pageã€‚å› æ­¤ï¼Œä¸ºäº†å¾—åˆ°æŽ§åˆ¶å™¨IDï¼Œä½ åº”è¯¥å°†æŽ§åˆ¶å™¨ç±»åç§°åŽ»æŽ‰ControlleråŽç¼€å¹¶ä¸”ä½¿ç¬¬ä¸€ä¸ªå­—æ¯å°å†™ã€‚ä¸ºäº†èŽ·å–åŠ¨ä½œIDï¼Œä½ åº”è¯¥å°†åŠ¨ä½œæ–¹æ³•ååŽ»æŽ‰actionå‰ç¼€å¹¶ä½¿ç¬¬ä¸€ä¸ªå­—æ¯å°å†™ã€‚
+$_GETå˜é‡ä¼ é€’çš„å‚æ•°ä¼šè¢«ä¼ é€’ç»™æŒ‡å®šçš„å†…éƒ¨è·¯ç”±åŠ¨ä½œã€‚ä¾‹å¦‚ï¼Œå¦‚æžœæˆ‘ä»¬æƒ³åˆ›å»ºä¸€ä¸ªURLæŒ‡å‘WebsiteController::actionIndexï¼Œå¹¶ä¼ é€’å‚æ•°$_GET['name']ç»™å®ƒï¼Œæˆ‘ä»¬å¯ä»¥è¿™æ ·æ¥åšï¼š
 	echo CHtml::link('Click me!', array('website/index',
 				'name' => 'Qiang'));
 
-URLsÔÚ¿ØÖÆÆ÷ÖÐÒ²ºÜÓÐÓÃ´¦¡£ÔÚ¿ØÖÆÆ÷ÄÚ²¿£¬Äã¿ÉÒÔÓÃcreateUrlºÍcreateAbsoluteUrlÀ´µÃµ½Ïà¶ÔURlºÍ¾ø¶ÔURL£º
+URLsåœ¨æŽ§åˆ¶å™¨ä¸­ä¹Ÿå¾ˆæœ‰ç”¨å¤„ã€‚åœ¨æŽ§åˆ¶å™¨å†…éƒ¨ï¼Œä½ å¯ä»¥ç”¨createUrlå’ŒcreateAbsoluteUrlæ¥å¾—åˆ°ç›¸å¯¹URlå’Œç»å¯¹URLï¼š
 	class WebsiteController extends CController
 	{
 		public function actionTest()
@@ -147,24 +147,24 @@ URLsÔÚ¿ØÖÆÆ÷ÖÐÒ²ºÜÓÐÓÃ´¦¡£ÔÚ¿ØÖÆÆ÷ÄÚ²¿£¬Äã¿ÉÒÔÓÃcreateUrlºÍcreateAbsoluteUrlÀ´µÃ
 			//echo $this->createUrl('website/page', 'alias' => 'about');
 			//echo $this->createAbsoluteUrl('website/page',
 			//'alias' => 'test');
-			//ÒëÕß×¢£ºÔ­ÊéÊÇÉÏÃæµÄ´úÂë£¬Êµ¼Ê²âÊÔÊ±µÚ¶þ¸ö²ÎÊýÓ¦ÎªÊý×é£¬·ñÔò³ö´í£¬ÏÂÃæÊÇÎÒÐ´µÄ´úÂë
+			//è¯‘è€…æ³¨ï¼šåŽŸä¹¦æ˜¯ä¸Šé¢çš„ä»£ç ï¼Œå®žé™…æµ‹è¯•æ—¶ç¬¬äºŒä¸ªå‚æ•°åº”ä¸ºæ•°ç»„ï¼Œå¦åˆ™å‡ºé”™ï¼Œä¸‹é¢æ˜¯æˆ‘å†™çš„ä»£ç 
 			//public string createUrl(string $route, array $params=array ( ), string $ampersand='&')
 			echo $this->createUrl('website/page',array('alias'=>'about'));
 			echo $this->createAbsoluteUrl('website/page',array('alias'=>'about'));
 		}
 		// the rest of the methods
 	}
-ÎÒÃÇ½«µÃµ½ÈçÏÂµÄURL£º
+æˆ‘ä»¬å°†å¾—åˆ°å¦‚ä¸‹çš„URLï¼š
 	/about
 	http://example.com/about
-ÒëÕß×¢£ºÊµ¼Ê²âÊÔÒòÎªindex.phpÒþ²ØÊ½ÔÚ.htaccessÎÄ¼þÖÐÊµÏÖµÄ£¬¹ÊÉú³ÉURL½á¹ûÓ¦¸ÃÊÇ£º/index.php/about¡¢http://example.com/index.php/about
+è¯‘è€…æ³¨ï¼šå®žé™…æµ‹è¯•å› ä¸ºindex.phpéšè—å¼åœ¨.htaccessæ–‡ä»¶ä¸­å®žçŽ°çš„ï¼Œæ•…ç”ŸæˆURLç»“æžœåº”è¯¥æ˜¯ï¼š/index.php/aboutã€http://example.com/index.php/about
 
-Ïà¶ÔURLs¿ÉÒÔÓÃÔÚÓ¦ÓÃ³ÌÐòÄÚ²¿£¬¾ø¶ÔURLsÓ¦¸ÃÓÃÔÚÖ¸ÏòÍâ²¿×ÊÔ´µÄµØÖ·»òÕßÖ¸Ïò´ÓÍâ²¿·ÃÎÊÓ¦ÓÃ³ÌÐòµÄ×ÊÔ´£¨ÀýÈçRSS feeds¡¢e-mailsµÈµÈ£©¡£
-µ±Äã²»ÄÜ»ñÈ¡¿ØÖÆÆ÷ÊµÀýÊ±£¬ÀýÈç£¬ÄãÔÚÖ´ÐÐÒ»¸ö¿ØÖÆÌ¨Ó¦ÓÃ³ÌÐò£¬Äã¿ÉÒÔÓÃÓ¦ÓÃ³ÌÐòµÄ·½·¨£º
+ç›¸å¯¹URLså¯ä»¥ç”¨åœ¨åº”ç”¨ç¨‹åºå†…éƒ¨ï¼Œç»å¯¹URLsåº”è¯¥ç”¨åœ¨æŒ‡å‘å¤–éƒ¨èµ„æºçš„åœ°å€æˆ–è€…æŒ‡å‘ä»Žå¤–éƒ¨è®¿é—®åº”ç”¨ç¨‹åºçš„èµ„æºï¼ˆä¾‹å¦‚RSS feedsã€e-mailsç­‰ç­‰ï¼‰ã€‚
+å½“ä½ ä¸èƒ½èŽ·å–æŽ§åˆ¶å™¨å®žä¾‹æ—¶ï¼Œä¾‹å¦‚ï¼Œä½ åœ¨æ‰§è¡Œä¸€ä¸ªæŽ§åˆ¶å°åº”ç”¨ç¨‹åºï¼Œä½ å¯ä»¥ç”¨åº”ç”¨ç¨‹åºçš„æ–¹æ³•ï¼š
 	echo Yii::app()->createUrl('website/page', 'alias' => 'about');
 	echo Yii::app()->createAbsoluteUrl('website/page', 'alias' => 'test');
-	ÒëÕß×¢£º´Ë´¦Í¬ÉÏ£¬µÚ¶þ¸ö²ÎÊýÓ¦¸ÃÎªÊý×é¡£public string createUrl(string $route, array $params=array ( ), string $ampersand='&')
-Á½ÖÖ·½·¨µÄ²»Í¬Ö®´¦ÔÚÓÚµ±ÄãÓÃÖ¸¶¨µÄ¿ØÖÆÆ÷·½·¨Ê±£¬Äã¿ÉÒÔÊ¡ÂÔ¿ØÖÆÆ÷ºÍÄ£¿éÃû³Æ¡£ÔÚÏÂÃæÀý×ÓÖÐ£¬µ±Ç°µÄÄ£¿éÃûºÍµ±Ç°µÄ¿ØÖÆÆ÷Ãû±»Ó¦ÓÃ£º
+	è¯‘è€…æ³¨ï¼šæ­¤å¤„åŒä¸Šï¼Œç¬¬äºŒä¸ªå‚æ•°åº”è¯¥ä¸ºæ•°ç»„ã€‚public string createUrl(string $route, array $params=array ( ), string $ampersand='&')
+ä¸¤ç§æ–¹æ³•çš„ä¸åŒä¹‹å¤„åœ¨äºŽå½“ä½ ç”¨æŒ‡å®šçš„æŽ§åˆ¶å™¨æ–¹æ³•æ—¶ï¼Œä½ å¯ä»¥çœç•¥æŽ§åˆ¶å™¨å’Œæ¨¡å—åç§°ã€‚åœ¨ä¸‹é¢ä¾‹å­ä¸­ï¼Œå½“å‰çš„æ¨¡å—åå’Œå½“å‰çš„æŽ§åˆ¶å™¨åè¢«åº”ç”¨ï¼š
 	class MyController extends CController
 	{
 		public function actionIndex()
