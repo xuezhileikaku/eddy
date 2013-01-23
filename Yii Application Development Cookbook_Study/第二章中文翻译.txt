@@ -81,3 +81,97 @@ RewriteRule . index.php
 你也可以为此参数定义一个模式。在第二天规则中就是这么做的：
 	'<alias:about>' => 'website/page',
 这里的alias应该匹配about或其他值，否则规则不会被应用。
+
+延生阅读
+参考更多信息，请查阅以下地址：
+http://www.yiiframework.com/doc/guide/en/basics.controller
+http://www.yiiframework.com/doc/guide/en/topics.url
+http://www.yiiframework.com/doc/api/1.1/CUrlManager
+
+通过路径生成URLs
+Yii不仅允许你通过URLs路由到不同的控制器和动作，也允许通过指定内部的路由和参数来生成URL。这是很有用的一个功能，因为这可以让你在开发应用程序时只需要把精力集中在内部路由上，二无需关心真实的URLs。
+	[备注：不要直接指定URLs，而要用Yii URL工具。这会让你在修改URLs时省去重写更多代码]
+
+开始吧
+1.用yiic webapp命令创建一个新的Yii应用程序，找到protected/config/main.php文件，替换规则数组如下：
+	// application components
+	'components'=>array(
+		…
+		// uncomment the following to enable URLs in path-format
+		/*
+			'urlManager'=>array(
+				'urlFormat'=>'path',
+				'rules'=>array(
+					'<alias:about>' => 'website/page',
+					'page/about/<alias:authors>' => 'website/page',
+					'page/<alias>' => 'website/page',
+		),
+2.在protected/controllers目录下，创建WebsiteController.php文件，写入如下代码：
+class WebsiteController extends CController
+{
+	public function actionIndex()
+	{
+		echo "index";
+	}
+	public function actionPage($alias)
+	{
+		echo "Page is $alias.";
+	}
+}
+此为应用程序的控制器，我们为其创造个性化的URL。
+3.配置应用程序服务器一使用干净的URLs。如果你的服务器是Apache，开启了mod_rewrite模块且AllowOverride设置为on，那么你需要在webroot根目录下的.htaccess文件中添加以下代码：
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+如何做……
+我们需要生成URLs指向WebsiteController的index和page动作。有几种不同的方式去实现，这取决于我们在哪需要它，但基本原理都是一个的。让我们列出一些生成URLs的方法。
+CHtml::link()和其他CHtml方法，例如form、refresh和ajaxLink等都可以用来生成URL，它们经常在视图中被使用。Yii内部用CHtml::normalizeUrl来解析内部路由。因此，你应该按以下格式传参给这些方法：
+	URL字符串：在这种情况下，URL直接被使用。
+	array(internal route, param => value, param => value, …)。此种情况下，URL将被生成。
+什么是内部路由？每一个控制器和它的动作方法都有相关的路由。一个格式化的路由是这样的：moduleID/controllerID/actionID。例如WebsiteController的actionPage方法对应的路由为website/page。因此，为了得到控制器ID，你应该将控制器类名称去掉Controller后缀并且使第一个字母小写。为了获取动作ID，你应该将动作方法名去掉action前缀并使第一个字母小写。
+$_GET变量传递的参数会被传递给指定的内部路由动作。例如，如果我们想创建一个URL指向WebsiteController::actionIndex，并传递参数$_GET['name']给它，我们可以这样来做：
+	echo CHtml::link('Click me!', array('website/index',
+				'name' => 'Qiang'));
+
+URLs在控制器中也很有用处。在控制器内部，你可以用createUrl和createAbsoluteUrl来得到相对URl和绝对URL：
+	class WebsiteController extends CController
+	{
+		public function actionTest()
+		{
+			//echo $this->createUrl('website/page', 'alias' => 'about');
+			//echo $this->createAbsoluteUrl('website/page',
+			//'alias' => 'test');
+			//译者注：原书是上面的代码，实际测试时第二个参数应为数组，否则出错，下面是我写的代码
+			//public string createUrl(string $route, array $params=array ( ), string $ampersand='&')
+			echo $this->createUrl('website/page',array('alias'=>'about'));
+			echo $this->createAbsoluteUrl('website/page',array('alias'=>'about'));
+		}
+		// the rest of the methods
+	}
+我们将得到如下的URL：
+	/about
+	http://example.com/about
+译者注：实际测试因为index.php隐藏式在.htaccess文件中实现的，故生成URL结果应该是：/index.php/about、http://example.com/index.php/about
+
+相对URLs可以用在应用程序内部，绝对URLs应该用在指向外部资源的地址或者指向从外部访问应用程序的资源（例如RSS feeds、e-mails等等）。
+当你不能获取控制器实例时，例如，你在执行一个控制台应用程序，你可以用应用程序的方法：
+	echo Yii::app()->createUrl('website/page', 'alias' => 'about');
+	echo Yii::app()->createAbsoluteUrl('website/page', 'alias' => 'test');
+	译者注：此处同上，第二个参数应该为数组。public string createUrl(string $route, array $params=array ( ), string $ampersand='&')
+两种方法的不同之处在于当你用指定的控制器方法时，你可以省略控制器和模块名称。在下面例子中，当前的模块名和当前的控制器名被应用：
+	class MyController extends CController
+	{
+		public function actionIndex()
+		{
+			// As we're inside of controller, createUrl will assume that
+			URL
+			// is for current controller
+			echo $this->createUrl('index');
+		}
+	}
