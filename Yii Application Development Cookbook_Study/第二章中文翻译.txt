@@ -175,3 +175,131 @@ URLs在控制器中也很有用处。在控制器内部，你可以用createUrl�
 			echo $this->createUrl('index');
 		}
 	}
+
+如何工作的？
+我们提到的所有URL生成工具都是运用CWebApplication::createUrl方法（CUrlManager::createUrl）来实现的。它试着自顶向下一个个去应用路由规则。如果没有规则被匹配，那么将会生成缺省的URL格式。
+
+更多......
+参考下面的地址可获取更多信息：
+	http://www.yiiframework.com/doc/guide/en/basics.controller
+	http://www.yiiframework.com/doc/guide/en/topics.url
+	http://www.yiiframework.com/doc/api/CUrlManager
+	http://www.yiiframework.com/doc/api/CHtml/#normalizeUrl-detail
+	http://www.yiiframework.com/doc/api/CHtml/#link-detail
+	http://www.yiiframework.com/doc/api/CController/#createUrldetail
+	http://www.yiiframework.com/doc/api/CWebApplication/#createUrldetail
+
+在URL规则中应用正则表达式
+Yii URL路由有一个“隐蔽”的功能，那就是你可以在URL规则中应用正则表达式，这张处理字符串时非常有用。
+
+开始吧
+1.用yiic webapp命令创建一个新的Yii应用程序，找到protected/config/main.php，应包含如下代码：
+// application components
+'components'=>array(
+	…
+	// uncomment the following to enable URLs in path-format
+	/*
+	'urlManager'=>array(
+		'urlFormat'=>'path',
+		'rules'=>array(
+		'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+		'<controller:\w+>/<action:\w+>/<id:\
+		d+>'=>'<controller>/<action>',
+		'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+		),
+	),
+2.删除rules中的内容，我们从头开始配置。
+3.在你的protected/controllers文件夹下，创建PostController.php文件，写入如下代码：
+	class PostController extends CController
+	{
+		public function actionView($alias)
+		{
+			echo "Showing post with alias $alias.";
+		}
+		public function actionIndex($order = 'DESC')
+		{
+			echo "Showing posts ordered $order.";
+		}
+		public function actionHello($name)
+		{
+			echo "Hello, $name!";
+		}
+	}
+此为应用程序的控制器，我们为其创造个性化的URL。
+4.配置应用程序服务器一使用干净的URLs。如果你的服务器是Apache，开启了mod_rewrite模块且AllowOverride设置为on，那么你需要在webroot根目录下的.htaccess文件中添加以下代码：
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+如何做......
+我们想PostController的动作根据一些规则来接收参数，如果参数不匹配规则，那么就返回"404 not found"。另外，
+让我们用正则表达式来实现：
+
+	'post/<alias:[-a-z]+>' => 'post/view',
+	'(posts|archive)' => 'post/index',
+	'(posts|archive)/<order:(DESC|ASC)>' => 'post/index',
+	'sayhello/<name>' => 'post/hello',
+现在，你可以尝试访问如下URLs：
+	// success
+	http://example.com/post/test-post
+	// success
+	http://example.com/post/another_post
+	// success
+	http://example.com/posts
+	// success
+	http://example.com/archive
+	// fail
+	http://example.com/archive/test
+	// success
+	http://example.com/posts/ASC
+访问http://example.com/post/test-post，应该显示如下：
+	Showing post with alias test-post.
+访问http://example.com/archive/test，应该会显示错误，显示如下：
+	Error 404
+	Unable to resolve the request "archive/test".
+
+如何工作的......
+在参数定义和其余规则中都可以应用正则表达式。我们来一条条看看我们定义的规则：
+	'post/<alias:[-a-z]+>' => 'post/view',
+Alias参数应该包含一个或更多英文字符或'-'字符。其余字符是不允许的。
+	'(posts|archive)' => 'post/index',
+posts和archive均指向post/index。
+	'(posts|archive)/<order:(DESC|ASC)>' => 'post/index',
+posts和archive均指向post/index。参数Order仅接受连个值：DESC和ASC。
+	'sayhello/<name>' => 'post/hello',
+你应该指定name值，但是没有任何限制。
+要注意的是尽管应用了规则，开发人员也不能假定用户输入的数据是安全的。
+
+更多......
+访问以下资源，可以学习更多关于正则表达式的知识：
+	http://www.php.net/manual/en/reference.pcre.pattern.syntax.php
+	Mastering Regular Expressions, by Jeffrey Friedl (http://regex.info/)
+
+为静态页面创建URL规则
+
+在程序运行时提供你自己的URL规则
+
+运用基本的控制器
+
+运用内部动作
+
+用CViewAction显示静态页面
+
+运用flash消息
+
+在视图中运用控制器实例
+
+运用局部模板来重用视图
+
+运用代码片段（clips）
+
+运用装饰件（decorators）
+
+定义多重布局
+
+分页和数据整理
