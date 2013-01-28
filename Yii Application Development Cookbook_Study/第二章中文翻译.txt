@@ -282,7 +282,203 @@ posts和archive均指向post/index。参数Order仅接受连个值：DESC和ASC�
 
 为静态页面创建URL规则
 
+一个网站一般都包含一些静态页面，比如/about、/contact、/tos等等页面。我们一般在一个独立的控制器中去处理这些页面。让我们来找一个种方式为这些页面创建URL规则。
+
+开始吧......
+
+1.用yiic webapp命令创建一个新的Yii应用程序，找到protected/config/main.php，应包含如下代码：
+// application components
+'components'=>array(
+	…
+	// uncomment the following to enable URLs in path-format
+	/*
+	'urlManager'=>array(
+		'urlFormat'=>'path',
+		'rules'=>array(
+		'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+		'<controller:\w+>/<action:\w+>/<id:\
+		d+>'=>'<controller>/<action>',
+		'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+		),
+	),
+2.删除rules中的内容，我们从头开始配置。
+3.在你的protected/controllers文件夹下，创建WebsiteController.php文件，写入如下代码：
+	class WebsiteController extends CController
+	{
+		public function actionPage($alias)
+		{
+			echo "Page is $alias.";
+		}
+	}
+4.配置应用程序服务器一使用干净的URLs。如果你的服务器是Apache，开启了mod_rewrite模块且AllowOverride设置为on，那么你需要在webroot根目录下的.htaccess文件中添加以下代码：
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+如何做......
+最直接的方式就是为每个页面定义一条规则：
+	'<alias:about>' => 'website/page',
+	'<alias:contact>' => 'website/page',
+	'<alias:tos>' => 'website/page',
+
+运用正则表达式，我们可以把它压缩成一条规则：
+	'<alias:(about|contact|tos)>' => 'website/page',
+
+如我我们希望URL是/tos，并且alias参数为terms_of_service，那该怎么办呢？
+
+没问题，我们可以用缺省参数来实现：
+	'tos' => array('website/page', 'defaultParams' => array('alias' =>
+	'terms_of_service')),
+
+OK。如果我们有很多页面，而且能够动态地创建页面而不需要添加更多规则或是去修改已经存在的规则，那么应该怎么办呢？
+
+我们可以这样来实现：
+	'<alias>' => 'website/page'
+
+这条规则会匹配所有情况，我们需要把它放到最后面，以免影响其他规则。另外，缺省规则有个slug，比如控制器名会失效。为了解决这个问题，我们需要添加我们之前删除了的缺省规则。
+
+如何工作的......
+
+让我们看看我们刚写的规则。
+	'<alias:about>' => 'website/page',
+如果URL是/about，那么给将会把about作为alias参数传递给website/page。
+
+	'<alias:(about|contact|tos)>' => 'website/page',
+如果URL是/about、/contact或/tos，那么给将会把对应值作为alias参数传递给website/page。
+
+	'tos' => array('website/page', 'defaultParams' => array('alias' =>
+'terms_of_service')),
+当URL为/tos时，把terms_of_service作为alias值。这条规则有点特别，因为它用到了缺省参数值。缺省省参数允许你设置一个值，当指定的参数名未给定的时候就用这个缺省值。当你需要指定这个选项时，你应该用数组来表示：
+	
+	'pattern' => array('internal/route', 'option' => 'value', 'option' =>
+'value', …),
+
+	[备注：你可以设置的options列表，参考http://www.yiiframework.com/doc/api/1.1/CUrlRule]
+
+
 在程序运行时提供你自己的URL规则
+
+当你运用插件模块化架构来开发应用程序时，你肯定希望能以某种方式将指定的模块规则插入到当前的应用程序中。
+
+开始吧
+
+1、运用yiic webapp生成一个新的应用程序。
+2、添加.htaccess文件（官方教程的URL管理一节有说明）到你的web根目录。
+3、添加 'showScriptName' => false 至urlManager配置中。
+4、运用Gii生成Page模块。
+5、不要忘记添加你的新模块到应用程序配置文件的模块列表中。
+
+Yii代码生成工具如下图所示：
+	XXX
+
+如何做......
+
+1、在protected/components目录下创建ModuleUrlManager.php文件，写入如下代码：
+	<?php
+	class ModuleUrlManager
+	{
+		static function collectRules()
+		{
+			if(!empty(Yii::app()->modules))
+			{
+				foreach(Yii::app()->modules as $moduleName => $config)
+				{
+					$module = Yii::app()->getModule($moduleName);
+					if(!empty($module->urlRules))
+					{
+						Yii::app()->getUrlManager()->addRules($module->urlRules);
+					}
+				}
+			}
+			return true;
+		}
+	}
+
+2、在应用程序配置中，添加如下一行：
+	'onBeginRequest' => array('ModuleUrlManager', 'collectRules'),
+
+3、现在在你的page模块中，你可以添加自定义的规则。打开PageModule.php文件添加如下内容：
+	public $urlRules = array(
+		'test' => 'page/default/index',
+	);
+
+4、打开浏览器访问http://example.com/test，测试是否正常工作。页面应该显示如下：
+	page/default/index
+
+	这是“index”动作的视图内容，此动作属于”page“模块中的“DefaultController”控制器。
+
+5、你也可以覆盖你的主应用程序中的URL规则。因此，你在模块中指定的URL规则仅当主应用程序中的规则均不匹配才会被应用。
+
+如何工作的......
+
+让我们看看ModuleUrlManager::collectRules方法：
+
+如果我们的应用程序定义了模块，那么我们就会检测urlRules公共属性是否存在。如果存在，运用CUrlManager::addRules方法将定义的URL规则添加到主应用程序配置中。CUrlManager::addRules方法描述到：“为了使新的规则有效，此方法应该在CWebApplication::processRequest之前被调用”。
+
+现在让我们看看我们的应用程序是如何工作的。在index.php中，有如下一行：
+
+	Yii::createWebApplication($config)->run();
+
+在应用配置文件初始化之后，我们调用了CWebApplication::run():
+	
+	public function run()
+	{
+		if($this->hasEventHandler('onBeginRequest'))
+			$this->onBeginRequest(new CEvent($this));
+		$this->processRequest();
+		if($this->hasEventHandler('onEndRequest'))
+			$this->onEndRequest(new CEvent($this));
+	}
+
+我们看到，在调用之前processRequest，onBeginRequest事件被触发。
+
+更多......
+
+在每个请求前都实例化应用程序模块，这对性能是不利的。一个好的方法就是缓存模块规则。缓存的规则依赖与你的应用程序。让我们看个简单的例子：
+
+	<?php
+	class ModuleUrlManager
+	{
+		static function collectRules()
+		{
+			if(!empty(Yii::app()->modules))
+			{
+				$cache = Yii::app()->getCache();
+
+				foreach(Yii::app()->modules as $moduleName => $config)
+				{
+					$urlRules = false;
+
+					if($cache)
+						$urlRules = $cache->get('module.urls.'.$moduleName);
+
+					if($urlRules===false){
+						$urlRules = array();
+						$module = Yii::app()->getModule($moduleName);
+
+						if(isset($module->urlRules))
+							$urlRules = $module->urlRules;
+
+						if($cache)
+							$cache->set('module.urls.'.$moduleName, $urlRules);
+					}
+
+					if(!empty($urlRules))
+						Yii::app()->getUrlManager()->addRules($urlRules);
+				}
+			}
+
+			return true;
+		}
+	}
+
+上面的代码缓存了每个模块的URL规则。因此，添加一个新的模块是没有问题的，但是修改现存的模块需要手动更新缓存：
+	Yii::app()->cache->flush().
 
 运用基本的控制器
 
