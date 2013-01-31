@@ -730,7 +730,102 @@ Yii代码生成工具如下图所示：
 
 用CViewAction显示静态页面
 
+如果你有一些静态页面，而且你不是经常修改它，那么就没有必要去查询数据库执行页面渲染与管理。
+
+开始吧
+
+	用yiic webapp命令创建一个新的Yii应用程序。
+
+如何做......
+
+1、我们只需要将CViewAction连接到我们的控制器即可。
+	class SiteController extends CController
+	{
+		function actions()
+		{
+			return array(
+				'page'=>array(
+					'class'=>'CViewAction',
+				),
+			);
+		}
+	}
+
+2、现在，把你当页面放到protected/views/site/pages目录下，命名为about.php 和 contact.php。现在你可以用下面的URL进行访问：
+	http://example.com/index.php?r=site/page&view=contact
+
+	当然你也可以用如下的URL，如果你配置了path模式的干净URLs。
+	http://example.com/site/page/view/about
+
+如何工作的......
+
+我们运用了外部的名为CViewAction的动作，CViewAction只是简单的去查找是否存在和$_GET参数同名的视图文件。如果存在，那么显示它，否则显示404 Not found页面。
+
+更多......
+
+Parameter name			Description
+basePath					It is a base path alias that is prepended to a view name. Default is
+						pages. That means a page named faq.company will be translated to
+						protected/views/pages/faq/company.php.
+defaultView				It is a name of a page to render when there is no $_GET parameter
+						supplied. Default is index.
+layout					Layout used to render a page. By default, controller layout is used. If it
+						is set to null, then no layout is applied.
+renderAsText				If set to true, then the page will be rendered as is. Else, PHP inside will
+						be executed.
+viewParam				The name of the $_GET parameter used to pass page name to
+						CViewAction. Default is view.
+
+延伸阅读
+	参考下面的地址可获取更多信息：
+	http://www.yiiframework.com/doc/api/CViewAction
+
 运用flash消息
+
+当你运用表单来编辑模型、删除模型或是做其他操作，告诉用户结果是成功还是出错，这对用户来说是很友好的。典型的例子就是，在某个操作后，比如编辑表单，然后会有一个网页重定向，我们需要在重定向的网页上显示消息。然而，如何从当前页面传递消息到重定向页面，传递完成后清除消息呢？Flas消息将会帮助我们。
+
+开始吧
+
+用yiic webapp命令创建一个新的Yii应用程序。
+
+如何做......
+
+1、让我们创建一个protected/controllers/WebsiteController.php控制器，代码如下：
+	class WebsiteController extends CController
+	{
+		function actionOk(){
+			Yii::app()->user->setFlash('success','Everything went fine!');
+			$this->redirect('index');
+		}
+
+		function actionBad(){
+			Yii::app()->user->setFlash('error','Everything went wrong!');
+			$this->redirect('index');
+		}
+	}
+
+2、另外，创建protected/views/website/index.php视图，代码如下:
+	<?php if(Yii::app()->user->hasFlash('success')):?>
+	<div class="flash-notice">
+	<?php echo Yii::app()->user->getFlash('success')?>
+	</div>
+	<?php endif?>
+	<?php if(Yii::app()->user->hasFlash('error')):?>
+	<div class="flash-error">
+	<?php echo Yii::app()->user->getFlash('error')?>
+	</div>
+	<?php endif?>
+
+3、现在，如果你访问http://example.com/website/ok，我们将会被重定向到http://example.com/website/index，而且一个成功的消息将会被显示。如果我们访问的是http://example.com/website/bad，我们将会被重定向到相同的页面，但显示的是一个错误的消息，刷新index页面消息将会被隐藏。
+
+如何工作的......
+
+我们用Yii::app()->user->setFlash('success','Everything went fine!')设置了一个flash消息，例如，调用CWebUser::setFlash方法。在内部，它把消息存储到用户状态中，在底层就是我们的消息被保存在$_SESSION变量中，当Yii::app()->user->getFlash('success')被调用时，$_SESSION中相应的键值被删除。
+
+更多
+
+下面的URL包含了CWebUser的API参考，它将会有助于你更好的理解flash消息：
+http://www.yiiframework.com/doc/api/CWebUser
 
 在视图中运用控制器实例
 
