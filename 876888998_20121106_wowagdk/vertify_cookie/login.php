@@ -39,7 +39,7 @@ if(version_compare(PHP_VERSION, '5.3.0') >= 0){
 	$cookie = trim(substr($data[1],0,26)); 
 	//加个判断，把两种情况都考虑
 	$p = trim(substr($data[1],0,27));
-	if(sub_str($p,-1) != ';'){
+	if(substr($p,-1) != ';'){
 		$cookie = trim(substr($data[1],0,32));
 	}
 }
