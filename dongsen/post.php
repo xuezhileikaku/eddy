@@ -58,13 +58,18 @@ $snoopy2->submit($action,$formvars);
 //取验证码
 $snoopy->fetch($hostaddr . '/?useValid=0.'.time());
 $imgcode=base64_encode($snoopy->results);
+
+//保存验证码
+file_put_contents('code.png', $snoopy->results);
+//识别验证码
+include './recognition/recognition.php'
 ?>
 
 <form method="post" action="adduser.php" name="form1" onsubmit="return postData()">
 <table>
    <tr>
     <th>验证码</th>
-    <td><input name="validcode_source" id="validcodesource">
+    <td><input name="validcode_source" id="validcodesource" value="<?php echo $resul?>" />
     <img alt="" src="data:image/gif;base64,<?php echo $imgcode?>">
     </td>
    </tr>

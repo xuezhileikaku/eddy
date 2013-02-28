@@ -78,12 +78,18 @@ $_SESSION['vertifyValue']=$cookie;
 
 $imgcode=base64_encode($snoopy->results);
 
+//保存图片
+file_put_contents('code.png', $snoopy->results);
+
 if($imgcode=='')
 {
 	$snoopy2 = new Snoopy;
 	$snoopy2->cookies[$cookieName]=$cookie;
 	$snoopy2->fetch($hostaddr . '/?useValid=0.'.time());
 	$imgcode=base64_encode($snoopy2->results);
+
+	//保存图片
+	file_put_contents('code.png', $snoopy->results);
 
 	//重新获取cookie
 	foreach($snoopy2->headers as $value){
@@ -121,8 +127,13 @@ if($imgcode=='')
 foreach($_POST as $k=>$v){
 $_SESSION[$k]=$v;
 }
-?>
 
+//识别验证码
+include './recognition/recognition.php'
+
+//<body onload="document.forms['form1'].submit();">
+?>
+<body>
 <form method="post" action="post.php" name="form1" onsubmit="return postData()">
 <table>
    <tr>
@@ -131,7 +142,7 @@ $_SESSION[$k]=$v;
    </tr>
    <tr>
     <th>验证码</th>
-    <td><input name="validcode_source" id="validcodesource">
+    <td><input name="validcode_source" id="validcodesource" value="<?php echo $resul?>" />
     <img alt="" src="data:image/gif;base64,<?php echo $imgcode?>">
     </td>
    </tr>
@@ -143,3 +154,4 @@ $_SESSION[$k]=$v;
 	<input name="cookie"  type="hidden" value="<?php echo $cookie?>">
    <form>
 </table>
+<body>
