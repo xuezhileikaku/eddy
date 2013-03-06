@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html;charset=gbk">
 <?PHP
-
+//error_reporting(E_ALL);
 	file_put_contents('./conf/curserv.txt',$_POST['server']);
 
 	//人民币网关账号，该账号为11位人民币网关商户编号+01,该参数必填。

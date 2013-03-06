@@ -5,10 +5,10 @@ $serv = file_get_contents('./conf/curserv.txt');
 $ip = $iparr[$serv]['ip'];
 $port = $iparr[$serv]['port'];
 
-define(SERVER_ADDRESS, $ip);
-define(SERVER_PORT, $port);
+define('SERVER_ADDRESS', $ip);
+define('SERVER_PORT', $port);
 
-
+file_put_contents('./log.txt',SERVER_ADDRESS);
 #NOTES:
 #leverages stored in mt4 databse as integers. For example leverage=200 means that leverage 1:200
 

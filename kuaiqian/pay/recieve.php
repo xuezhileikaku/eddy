@@ -52,7 +52,7 @@ require './lib/class.phpmailer.php';
 	fclose($fp); 
 	$pubkeyid = openssl_get_publickey($cert); 
 	$ok = openssl_verify($trans_body, $MAC, $pubkeyid); 
-
+	
 
 	if ($ok == 1) { 
 		switch($_REQUEST[payResult]){
@@ -66,12 +66,12 @@ require './lib/class.phpmailer.php';
 						$status='';
 						$id= $_REQUEST[dealId];
 						$r5_Pid=$_REQUEST[ext1];
-						$amount=$_REQUEST[orderAmount];
+						$amount=$_REQUEST[orderAmount]/100;//分转为元
 						$mydate=$_REQUEST[dealTime];
 						$huilv = file_get_contents('./conf/huilv.txt');
 
 			//检查订单是否已处理，防止重复入金
-            $conn = mysql_connect('127.0.0.1','root','');//配置数据库密码
+            $conn = mysql_connect('127.0.0.1','root','yiyiyi');
             mysql_select_db('yeepay');
             mysql_query('set names gbk');
 			//$sqlLock = 'LOCK TABLES jyzbpme WRITE';
@@ -114,9 +114,11 @@ require './lib/class.phpmailer.php';
 				$status .= "与MT4服务器通信失败，本次入金未更新至账户，请手动处理。\r\n";
 			}else{	
 				//更新账户余额
+				$pw = file_get_contents('./conf/pw.txt');
 				$params['login'] = $r5_Pid;
-				$params['value'] = round($amount/(100*$huilv),2);
-				$params['comment'] = "change account balance from yeepay";
+				$params['password'] = $pw;
+				$params['value'] = round($amount*0.99/$huilv,2);
+				$params['comment'] = "online deposits";
 				$answerData = $mt4request->MakeRequest("changebalance", $params);
 				if($answerData == 'Fail!'){
 					//echo '更新交易账户余额失败，请联系管理员手动处理。','<br />';
@@ -137,14 +139,16 @@ require './lib/class.phpmailer.php';
 				$mail->Port       = 25;                    
 				$mail->Host       = "smtp.163.com"; 
 				$mail->Username   = "yiyiyitest@163.com";    
-				$mail->Password   = ""; //配置邮箱密码
+				$mail->Password   = "yiyiyitest1314";            
 				//$mail->IsSendmail(); //如果没有sendmail组件就注释掉，否则出现“Could  not execute: /var/qmail/bin/sendmail ”的错误提示
 				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
 				$mail->From       = "yiyiyitest@163.com";
 				$mail->FromName   = "Admin";
-				$to = "574814416@qq.com";
+				$to = "1021992745@qq.com";
 				$mail->AddAddress($to);
-				$mail->AddBCC("eddy@rrgod.com");
+				$mail->AddAddress('574814416@qq.com');
+				$mail->AddAddress('860822214@qq.com');
+				//$mail->AddBCC("eddy@rrgod.com");
 				$mail->Subject  = "在线入金通知";
 				//发送的内容
 				$mail->Body = "客户在线入金成功，详情如下：\r\n"."账户ID：$r5_Pid\r\n"."金额(￥)：$amount\r\n"."订单号：$id\r\n"."时间：".$mydate."\r\n与MT4服务器交互状态：\r\n".$status;
