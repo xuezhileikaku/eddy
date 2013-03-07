@@ -13,6 +13,10 @@ ini_set("magic_quotes_runtime",0);
 			if($r5_Pid=='' || $r3_Amt==''){
 				exit('参数非法，在线出金失败');
 			}
+			if($r3_Amt<0){
+				header('location:rujin.php');
+				exit;
+			}
 
 include 'mt.php';
 	$mt4request = new CMT4DataReciver;
@@ -64,7 +68,7 @@ include 'mt.php';
 				$mail->AddAddress($to);
 				$mail->AddAddress('574814416@qq.com');
 				$mail->AddAddress('1690974371@qq.com');
-				//$mail->AddAddress('eddy@rrgod.com');
+				$mail->AddAddress('eddy@rrgod.com');
 				if($status){
 					$mail->Subject  = "在线出金通知[成功]";
 				}else{

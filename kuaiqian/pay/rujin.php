@@ -156,7 +156,7 @@ if(!empty($username) && !empty($password)){
             </tbody></table>
         </form>
         <a href="./quit.php" class="link">退出登陆</a>
-		<p class="link">注意：用户账号为你的交易账户ID，请务必填写正确，否则会造成签约入金后账户余额不能同步更新。
+		<p class="link">
 		<font color="red">汇率：1美元(USD) = <?php echo file_get_contents('./conf/huilv.txt'); ?> 人民币(CNY)</font>
 		</p>
 		
@@ -292,7 +292,7 @@ if(!empty($username) && !empty($password)){
                 },
                 success: function (r) {
                     if (r == 1) {
-                        $('#tdMessage').html('在线出金下账成功！<br />请在弹出的页面中登陆官网提交本次出金的相关信息，方便客服汇款给您！');
+                        $('#tdMessage').html('在线出金下账成功！<br />请务必在弹出的页面中登陆官网提交本次出金的相关信息，方便客服汇款给您！<br /><font color=red>注意：未登陆官网提交本次出金信息或提交信息与本次出金信息不符，会造成我们无法汇款给您！！！</font>');
                         $('#glasslayer, #alter').show();
                     } else {
                         alert(r);
