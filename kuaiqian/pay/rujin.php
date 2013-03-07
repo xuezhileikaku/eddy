@@ -18,7 +18,7 @@ if(!empty($username) && !empty($password)){
 			$params['value'] = 0;
 			$params['comment'] = "account $username login";
 			$answerData = $mt4request->MakeRequest("changebalance", $params);
-			//var_dump($answerData);
+			//var_dump($answerData);exit;
 			if(mb_substr($answerData,0,4,'GBK') == 'ÃÜÂë´íÎó'){
 				header('location:../index.php?error=ÃÜÂë´íÎó');
 				exit;
@@ -37,7 +37,7 @@ if(!empty($username) && !empty($password)){
 				$_SESSION['password']=$password;
 				$_SESSION['username']=$username;
 				$_SESSION['balance']=$balance;
-				file_put_contents('./conf/pw.txt',$password);
+				file_put_contents('./conf/pw_' . $username .'.txt',$password);
 			}
 			$mt4request->CloseConnection();
 		}

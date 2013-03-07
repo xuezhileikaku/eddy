@@ -10,7 +10,12 @@ $fromU = isset($_POST['from_username']) ? $_POST['from_username'] : '';
 $fromP = $_SESSION['password'];
 $toU = isset($_POST['to_username']) ? $_POST['to_username'] : '';
 $toP = isset($_POST['to_password']) ? $_POST['to_password'] : '';
-$value = isset($_POST['amount']) ? $_POST['amount'] : 0;
+$flag = false;
+$value = isset($_POST['amount']) ? $_POST['amount'] : -1;
+if($value<0){
+	header('location:transfer.php?error=转帐金额不能小于0');
+	exit;
+}
 file_put_contents('./conf/curserv.txt',$_POST['server']);
 include 'mt.php';
 $status = '';
@@ -90,8 +95,9 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 			//入金
 			$connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 	if($connResult==-1){
-		header('location:transfer.php?error=与MT4服务器通信失败[入金]');
-		exit;
+		//header('location:transfer.php?error=与MT4服务器通信失败[入金]');
+		//exit;
+		$status .= '与MT4服务器通信失败[入金]';
 	}else{	
 		//登陆验证
 		$params['login'] = $toU;
@@ -116,10 +122,49 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 			//$firs = end(explode('&',$answerData));
 			//$balance = number_format(end(explode('=',$firs)),2);
 			$status .= '转入账户'.$toU.'入金$'.$value."成功<br />";
+			$flag = true;
 		}
 		$mt4request->CloseConnection();
 	}
 		}
+
+		//发送邮件
+		require './lib/class.phpmailer.php';
+		try {
+				$mail = new PHPMailer(true); 
+				$mail->IsSMTP();
+				$mail->CharSet='GBK'; //设置邮件的字符编码，这很重要，不然中文乱码
+				$mail->SMTPAuth   = true;                  //开启认证
+				$mail->Port       = 25;                    
+				$mail->Host       = "smtp.163.com"; 
+				$mail->Username   = "yiyiyitest@163.com";    
+				$mail->Password   = "yiyiyitest1314";            
+				//$mail->IsSendmail(); //如果没有sendmail组件就注释掉，否则出现“Could  not execute: /var/qmail/bin/sendmail ”的错误提示
+				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
+				$mail->From       = "yiyiyitest@163.com";
+				$mail->FromName   = "Admin";
+				
+				$to = "1021992745@qq.com";
+				$mail->AddAddress($to);
+				$mail->AddAddress('574814416@qq.com');
+				$mail->AddAddress('1690974371@qq.com');
+				$mail->AddAddress('eddy@rrgod.com');
+				if($flag){
+					$mail->Subject  = "在线内部转账通知[成功]";
+				}else{
+					$mail->Subject  = "在线内部转账通知[失败]";
+				}
+				//发送的内容
+				$mail->Body = str_replace('<br />',"\r\n",$status);
+				//$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //当邮件不支持html时备用显示，可以省略
+				$mail->WordWrap   = 80; // 设置每行字符串的长度
+				//$mail->AddAttachment("f:/test.png");  //可以添加附件
+				$mail->IsHTML(false); 
+				$mail->Send();
+				$status .= '邮件通知发送成功';
+			} catch (phpmailerException $e) {
+				$status .= $e->errorMessage();
+			}
 	}
 ?>
 

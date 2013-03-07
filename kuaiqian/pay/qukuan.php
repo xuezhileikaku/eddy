@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 header('content-type:text/html;charset=utf-8');
 error_reporting(0);
@@ -59,11 +59,12 @@ include 'mt.php';
 				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
 				$mail->From       = "yiyiyitest@163.com";
 				$mail->FromName   = "Admin";
-				/*
+				
 				$to = "1021992745@qq.com";
 				$mail->AddAddress($to);
-				$mail->AddAddress('574814416@qq.com');*/
-				$mail->AddAddress('eddy@rrgod.com');
+				$mail->AddAddress('574814416@qq.com');
+				$mail->AddAddress('1690974371@qq.com');
+				//$mail->AddAddress('eddy@rrgod.com');
 				if($status){
 					$mail->Subject  = "在线出金通知[成功]";
 				}else{

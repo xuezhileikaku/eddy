@@ -3,6 +3,7 @@
 
 include 'mt.php';
 require './lib/class.phpmailer.php';
+$flag = false;
 
 	function kq_ck_null($kq_va,$kq_na){if($kq_va == ""){return $kq_va="";}else{return $kq_va=$kq_na.'='.$kq_va.'&';}}
 	//人民币网关账号，该账号为11位人民币网关商户编号+01,该值与提交时相同。
@@ -82,7 +83,8 @@ require './lib/class.phpmailer.php';
             if($row){
                 //订单已处理，退出
                 mysql_close($conn);
-				file_put_contents('log.txt','订单已处理，退出',FILE_APPEND);
+				$res = file_put_contents('./log.txt','订单已处理，退出',FILE_APPEND);
+				//var_dump($res);
                 exit();
             }
 			
@@ -92,7 +94,7 @@ require './lib/class.phpmailer.php';
 			$r = mysql_query($sql);
 			if(!$r){
 				$status .="订单信息写入数据库失败，可能会出现重复入金，请检查";
-				file_put_contents('log.txt',$status,FILE_APPEND);
+				file_put_contents('./log.txt',$status,FILE_APPEND);
 				
 			}
 			
@@ -114,7 +116,7 @@ require './lib/class.phpmailer.php';
 				$status .= "与MT4服务器通信失败，本次入金未更新至账户，请手动处理。\r\n";
 			}else{	
 				//更新账户余额
-				$pw = file_get_contents('./conf/pw.txt');
+				$pw = file_get_contents('./conf/pw_' . $r5_Pid .'.txt');
 				$params['login'] = $r5_Pid;
 				$params['password'] = $pw;
 				$params['value'] = round($amount*0.99/$huilv,2);
@@ -123,9 +125,11 @@ require './lib/class.phpmailer.php';
 				if($answerData == 'Fail!'){
 					//echo '更新交易账户余额失败，请联系管理员手动处理。','<br />';
 					$status .= "更新交易账户余额失败，本次入金未更新至账户，请手动处理。\r\n";
+					file_put_contents('./log.txt',implode('#',$params) . "\r\n",FILE_APPEND);
 				}else{
 					//echo '更新交易账户余额成功。本次入金：$'.$r3_Amt.'<br />';
 					$status .= "更新交易账户余额成功。\r\n";
+					$flag = true;
 				}
 				$mt4request->CloseConnection();
 			}
@@ -149,9 +153,13 @@ require './lib/class.phpmailer.php';
 				$mail->AddAddress('574814416@qq.com');
 				$mail->AddAddress('860822214@qq.com');
 				//$mail->AddBCC("eddy@rrgod.com");
-				$mail->Subject  = "在线入金通知";
+				if($flag){
+					$mail->Subject  = "在线入金通知[更新成功]";
+				}else{
+					$mail->Subject  = "在线入金通知[更新失败]";
+				}
 				//发送的内容
-				$mail->Body = "客户在线入金成功，详情如下：\r\n"."账户ID：$r5_Pid\r\n"."金额(￥)：$amount\r\n"."订单号：$id\r\n"."时间：".$mydate."\r\n与MT4服务器交互状态：\r\n".$status;
+				$mail->Body = "客户在线入金通知，详情如下：\r\n"."账户ID：$r5_Pid\r\n"."金额(￥)：$amount\r\n"."订单号：$id\r\n"."时间：".$mydate."\r\n与MT4服务器交互状态：\r\n".$status;
 				//$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //当邮件不支持html时备用显示，可以省略
 				$mail->WordWrap   = 80; // 设置每行字符串的长度
 				//$mail->AddAttachment("f:/test.png");  //可以添加附件
