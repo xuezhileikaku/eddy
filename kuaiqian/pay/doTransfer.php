@@ -128,6 +128,23 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 	}
 		}
 
+		//写入记录至数据库
+		$db = mysqli_connect('localhost','root','');
+		if (!mysqli_connect_errno()) {
+			mysqli_select_db($db,'mt4_member');
+			mysqli_query($db,'set names gbk');
+			$d = date('Y-m-d H:i:s');
+			$s = $flag ? 1 : 0;
+			$sql = "insert into mt4_transfer values (null,'{$fromU}','{$toU}','{$value}','{$d}','{$s}','')";
+			$rs = mysqli_query($db,$sql);
+			if (!$rs) {
+				file_put_contents('./log.txt', '内部转账记录写入数据库失败[write failed] - ' . mysqli_error($db) . $d . "\r\n",FILE_APPEND);
+			}
+			mysqli_close($db);
+		}else{
+			file_put_contents('./log.txt', '内部转账记录写入数据库失败[open failed] - ' . mysqli_error($db) . $d . "\r\n",FILE_APPEND);
+		}
+
 		//发送邮件
 		require './lib/class.phpmailer.php';
 		try {
