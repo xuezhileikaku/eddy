@@ -58,7 +58,7 @@ if($connResult==-1){
 }
 
 //写入记录至数据库
-$db = mysqli_connect('localhost','root','yiyiyi');
+$db = mysqli_connect('localhost','root','');
 if (!mysqli_connect_errno()) {
 	mysqli_select_db($db,'yeepay');
 	mysqli_query($db,'set names utf8');
@@ -82,7 +82,7 @@ try {
 	$mail->Port       = 25;                    
 	$mail->Host       = "smtp.163.com"; 
 	$mail->Username   = "yiyiyitest@163.com";    
-	$mail->Password   = "yiyiyitest1314";            
+	$mail->Password   = "";            
 	//$mail->IsSendmail(); //如果没有sendmail组件就注释掉，否则出现“Could  not execute: /var/qmail/bin/sendmail ”的错误提示
 	$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
 	$mail->From       = "yiyiyitest@163.com";
