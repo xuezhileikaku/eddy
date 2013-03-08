@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 if(!isset($_SESSION['username']) || !isset($_SESSION['password'])){
-	header('location:../index.php?error=ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½');
+	header('location:../index.php?error=·Ç·¨·ÃÎÊ');
 	exit;
 }
 
@@ -13,36 +13,36 @@ $toP = isset($_POST['to_password']) ? $_POST['to_password'] : '';
 $flag = false;
 $value = isset($_POST['amount']) ? $_POST['amount'] : -1;
 if($value<0){
-	header('location:transfer.php?error=×ªï¿½Ê½ï¿½ï¿½î²»ï¿½ï¿½Ð¡ï¿½ï¿½0');
+	header('location:transfer.php?error=×ªÕÊ½ð¶î²»ÄÜÐ¡ÓÚ0');
 	exit;
 }
 file_put_contents('./conf/curserv.txt',$_POST['server']);
 include 'mt.php';
 $status = '';
-//ï¿½Ë»ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ö¤
+//ÕË»§ÓÐÐ§ÐÔÑéÖ¤
 $mt4request = new CMT4DataReciver;
 	$connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 		if($connResult==-1){
-			header('location:transfer.php?error=ï¿½ï¿½MT4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Ê§ï¿½ï¿½[ï¿½Ë»ï¿½ï¿½ï¿½Ö¤]');
+			header('location:transfer.php?error=ÓëMT4·þÎñÆ÷Í¨ÐÅÊ§°Ü[ÕË»§ÑéÖ¤]');
 			exit;
 		}else{	
-			//ï¿½ï¿½Â½ï¿½ï¿½Ö¤
+			//µÇÂ½ÑéÖ¤
 			$params['login'] = $toU;
 			$params['password'] = $toP;
 			$params['value'] = 0;
 			$params['comment'] = "vertify account $username";
 			$answerData = $mt4request->MakeRequest("changebalance", $params);
 			//var_dump($answerData);
-			if(mb_substr($answerData,0,4,'GBK') == 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'){
-				header('location:transfer.php?error=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+			if(mb_substr($answerData,0,4,'GBK') == 'ÃÜÂë´íÎó'){
+				header('location:transfer.php?error=ÃÜÂë´íÎó');
 				exit;
-			}else if(mb_substr($answerData,0,4,'GBK') == 'ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½'){
-				header('location:transfer.php?error=×ªï¿½ï¿½ï¿½ÊºÅ²ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+			}else if(mb_substr($answerData,0,4,'GBK') == '²éÑ¯ÓÃ»§'){
+				header('location:transfer.php?error=×ªÈëÕÊºÅ²»´æÔÚ£¬Çë¼ì²é');
 				exit;
 			}else if($answerData == 'Fail!'){
-				header('location:transfer.php?error=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+				header('location:transfer.php?error=ÆäËû´íÎó');
 				exit;
-			}else if(mb_substr($answerData,0,3,'GBK') == 'ï¿½ï¿½Ö§ï¿½ï¿½'){
+			}else if(mb_substr($answerData,0,3,'GBK') == '²»Ö§³Ö'){
 				header("location:transfer.php?error=$answerData");
 				exit;
 			}else{
@@ -52,7 +52,7 @@ $mt4request = new CMT4DataReciver;
 				$_SESSION['password']=$password;
 				$_SESSION['username']=$username;
 				$_SESSION['balance']=$balance;*/
-				$status .= '×ªï¿½ï¿½ï¿½Ë»ï¿½'.$toU."ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½É¹ï¿½<br />";
+				$status .= '×ªÈëÕË»§'.$toU."ÓÐÐ§ÐÔÑéÖ¤³É¹¦<br />";
 			}
 			$mt4request->CloseConnection();
 			$mt4request = null;
@@ -62,26 +62,26 @@ $mt4request = new CMT4DataReciver;
 $mt4request = new CMT4DataReciver;
 $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 	if($connResult==-1){
-		header('location:transfer.php?error=ï¿½ï¿½MT4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Ê§ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½]');
+		header('location:transfer.php?error=ÓëMT4·þÎñÆ÷Í¨ÐÅÊ§°Ü[³ö½ð]');
 		exit;
 	}else{	
-		//ï¿½ï¿½ï¿½ï¿½
+		//³ö½ð
 		$params['login'] = $fromU;
 		$params['password'] = $fromP;
 		$params['value'] = -$value;
 		$params['comment'] = "transfer to $toU";
 		$answerData = $mt4request->MakeRequest("changebalance", $params);
 		//var_dump($answerData);
-		if(mb_substr($answerData,0,4,'GBK') == 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'){
-			header('location:transfer.php?error=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+		if(mb_substr($answerData,0,4,'GBK') == 'ÃÜÂë´íÎó'){
+			header('location:transfer.php?error=ÃÜÂë´íÎó');
 			exit;
-		}else if(mb_substr($answerData,0,4,'GBK') == 'ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½'){
-			header('location:transfer.php?error=×ªï¿½ï¿½ï¿½ÊºÅ²ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+		}else if(mb_substr($answerData,0,4,'GBK') == '²éÑ¯ÓÃ»§'){
+			header('location:transfer.php?error=×ªÈëÕÊºÅ²»´æÔÚ£¬Çë¼ì²é');
 			exit;
 		}else if($answerData == 'Fail!'){
-			header('location:transfer.php?error=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+			header('location:transfer.php?error=ÆäËû´íÎó');
 			exit;
-		}else if(mb_substr($answerData,0,3,'GBK') == 'ï¿½ï¿½Ö§ï¿½ï¿½'){
+		}else if(mb_substr($answerData,0,3,'GBK') == '²»Ö§³Ö'){
 			header("location:transfer.php?error=$answerData");
 			exit;
 		}else{
@@ -91,44 +91,44 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 			//$_SESSION['username']=$username;
 			$_SESSION['balance']=$balance;
 			$mt4request->CloseConnection();
-			$status .= '×ªï¿½ï¿½ï¿½Ë»ï¿½'.$fromU.'ï¿½ï¿½ï¿½ï¿½$'.$value."ï¿½É¹ï¿½<br />";
-			//ï¿½ï¿½ï¿½ï¿½
+			$status .= '×ª³öÕË»§'.$fromU.'³ö½ð$'.$value."³É¹¦<br />";
+			//Èë½ð
 			$connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 	if($connResult==-1){
-		//header('location:transfer.php?error=ï¿½ï¿½MT4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Ê§ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½]');
+		//header('location:transfer.php?error=ÓëMT4·þÎñÆ÷Í¨ÐÅÊ§°Ü[Èë½ð]');
 		//exit;
-		$status .= 'ï¿½ï¿½MT4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Ê§ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½]';
+		$status .= 'ÓëMT4·þÎñÆ÷Í¨ÐÅÊ§°Ü[Èë½ð]';
 	}else{	
-		//ï¿½ï¿½Â½ï¿½ï¿½Ö¤
+		//µÇÂ½ÑéÖ¤
 		$params['login'] = $toU;
 		$params['password'] = $toP;
 		$params['value'] = $value;
 		$params['comment'] = "transfer from $fromU ";
 		$answerData = $mt4request->MakeRequest("changebalance", $params);
 		//var_dump($answerData);
-		if(mb_substr($answerData,0,4,'GBK') == 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'){
-			header('location:transfer.php?error=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+		if(mb_substr($answerData,0,4,'GBK') == 'ÃÜÂë´íÎó'){
+			header('location:transfer.php?error=ÃÜÂë´íÎó');
 			exit;
-		}else if(mb_substr($answerData,0,4,'GBK') == 'ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½'){
-			header('location:transfer.php?error=×ªï¿½ï¿½ï¿½ÊºÅ²ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+		}else if(mb_substr($answerData,0,4,'GBK') == '²éÑ¯ÓÃ»§'){
+			header('location:transfer.php?error=×ªÈëÕÊºÅ²»´æÔÚ£¬Çë¼ì²é');
 			exit;
 		}else if($answerData == 'Fail!'){
-			header('location:transfer.php?error=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+			header('location:transfer.php?error=ÆäËû´íÎó');
 			exit;
-		}else if(mb_substr($answerData,0,3,'GBK') == 'ï¿½ï¿½Ö§ï¿½ï¿½'){
+		}else if(mb_substr($answerData,0,3,'GBK') == '²»Ö§³Ö'){
 			header("location:transfer.php?error=$answerData");
 			exit;
 		}else{
 			//$firs = end(explode('&',$answerData));
 			//$balance = number_format(end(explode('=',$firs)),2);
-			$status .= '×ªï¿½ï¿½ï¿½Ë»ï¿½'.$toU.'ï¿½ï¿½ï¿½ï¿½$'.$value."ï¿½É¹ï¿½<br />";
+			$status .= '×ªÈëÕË»§'.$toU.'Èë½ð$'.$value."³É¹¦<br />";
 			$flag = true;
 		}
 		$mt4request->CloseConnection();
 	}
 		}
 
-		//Ð´ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
+		//Ð´Èë¼ÇÂ¼ÖÁÊý¾Ý¿â
 		$db = mysqli_connect('localhost','root','');
 		if (!mysqli_connect_errno()) {
 			mysqli_select_db($db,'mt4_member');
@@ -138,26 +138,26 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 			$sql = "insert into mt4_transfer values (null,'{$fromU}','{$toU}','{$value}','{$d}','{$s}','')";
 			$rs = mysqli_query($db,$sql);
 			if (!$rs) {
-				file_put_contents('./log.txt', 'ï¿½Ú²ï¿½×ªï¿½Ë¼ï¿½Â¼Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ê§ï¿½ï¿½[write failed] - ' . mysqli_error($db) . $d . "\r\n",FILE_APPEND);
+				file_put_contents('./log.txt', 'ÄÚ²¿×ªÕË¼ÇÂ¼Ð´ÈëÊý¾Ý¿âÊ§°Ü[write failed] - ' . mysqli_error($db) . $d . "\r\n",FILE_APPEND);
 			}
 			mysqli_close($db);
 		}else{
-			file_put_contents('./log.txt', 'ï¿½Ú²ï¿½×ªï¿½Ë¼ï¿½Â¼Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ê§ï¿½ï¿½[open failed] - ' . mysqli_error($db) . $d . "\r\n",FILE_APPEND);
+			file_put_contents('./log.txt', 'ÄÚ²¿×ªÕË¼ÇÂ¼Ð´ÈëÊý¾Ý¿âÊ§°Ü[open failed] - ' . mysqli_error($db) . $d . "\r\n",FILE_APPEND);
 		}
 
-		//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
+		//·¢ËÍÓÊ¼þ
 		require './lib/class.phpmailer.php';
 		try {
 				$mail = new PHPMailer(true); 
 				$mail->IsSMTP();
-				$mail->CharSet='GBK'; //ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-				$mail->SMTPAuth   = true;                  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤
+				$mail->CharSet='GBK'; //ÉèÖÃÓÊ¼þµÄ×Ö·û±àÂë£¬ÕâºÜÖØÒª£¬²»È»ÖÐÎÄÂÒÂë
+				$mail->SMTPAuth   = true;                  //¿ªÆôÈÏÖ¤
 				$mail->Port       = 25;                    
 				$mail->Host       = "smtp.163.com"; 
 				$mail->Username   = "yiyiyitest@163.com";    
-				$mail->Password   = "";            
-				//$mail->IsSendmail(); //ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½sendmailï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½Could  not execute: /var/qmail/bin/sendmail ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
-				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//ï¿½Ø¸ï¿½ï¿½ï¿½Ö·
+				$mail->Password   = "yiyiyitest1314";            
+				//$mail->IsSendmail(); //Èç¹ûÃ»ÓÐsendmail×é¼þ¾Í×¢ÊÍµô£¬·ñÔò³öÏÖ¡°Could  not execute: /var/qmail/bin/sendmail ¡±µÄ´íÎóÌáÊ¾
+				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//»Ø¸´µØÖ·
 				$mail->From       = "yiyiyitest@163.com";
 				$mail->FromName   = "Admin";
 				
@@ -167,18 +167,18 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 				$mail->AddAddress('1690974371@qq.com');
 				$mail->AddAddress('eddy@rrgod.com');
 				if($flag){
-					$mail->Subject  = "ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½×ªï¿½ï¿½ÖªÍ¨[ï¿½É¹ï¿½]";
+					$mail->Subject  = "ÔÚÏßÄÚ²¿×ªÕËÍ¨Öª[³É¹¦]";
 				}else{
-					$mail->Subject  = "ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½×ªï¿½ï¿½ÖªÍ¨[Ê§ï¿½ï¿½]";
+					$mail->Subject  = "ÔÚÏßÄÚ²¿×ªÕËÍ¨Öª[Ê§°Ü]";
 				}
-				//ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
+				//·¢ËÍµÄÄÚÈÝ
 				$mail->Body = str_replace('<br />',"\r\n",$status);
-				//$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ö§ï¿½ï¿½htmlÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½
-				$mail->WordWrap   = 80; // ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
-				//$mail->AddAttachment("f:/test.png");  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½
+				//$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //µ±ÓÊ¼þ²»Ö§³ÖhtmlÊ±±¸ÓÃÏÔÊ¾£¬¿ÉÒÔÊ¡ÂÔ
+				$mail->WordWrap   = 80; // ÉèÖÃÃ¿ÐÐ×Ö·û´®µÄ³¤¶È
+				//$mail->AddAttachment("f:/test.png");  //¿ÉÒÔÌí¼Ó¸½¼þ
 				$mail->IsHTML(false); 
 				$mail->Send();
-				$status .= 'ï¿½Ê¼ï¿½ÖªÍ¨ï¿½ï¿½ï¿½Í³É¹ï¿½';
+				$status .= 'ÓÊ¼þÍ¨Öª·¢ËÍ³É¹¦';
 			} catch (phpmailerException $e) {
 				$status .= $e->errorMessage();
 			}
@@ -187,7 +187,7 @@ $connResult = $mt4request->OpenConnection(SERVER_ADDRESS, SERVER_PORT);
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=gbk">
-    <title>×ªï¿½Ë½ï¿½ï¿½ï¿½</title>
+    <title>×ªÕË½á¹û</title>
     <link href="../css/main.css" rel="stylesheet" type="text/css">  
 	<style>
 	.attention{
@@ -200,12 +200,12 @@ margin:20px auto;
 <body>
 <div>
 <?php
-echo $status,'<a class="link" href="rujin.php">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³</a>';
+echo $status,'<a class="link" href="rujin.php">·µ»ØÊ×Ò³</a>';
 ?>
 <p class="attention">
-ï¿½ï¿½×¢ï¿½ï¿½<br />
-1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½É¹ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ë½ï¿½ï¿½×³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½<br />
-2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Ù·ï¿½ï¿½Í·ï¿½QQï¿½ï¿½873901871ï¿½ï¿½2695500379ï¿½ï¿½
+±¸×¢£º<br />
+1¡¢³ö½ðÓëÈë½ð¶¼ÏÔÊ¾³É¹¦ËµÃ÷±¾±Ê×ªÕË½»Ò×³É¹¦£¬·ñÔòÊ§°Ü¡£<br />
+2¡¢ÈçÓÐÈÎºÎÒÉÎÊ£¬ÇëÁªÏµ¹Ù·½¿Í·þQQ£º873901871¡¢2695500379¡£
 </p>
 </div>
 </body>
