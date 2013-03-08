@@ -86,7 +86,7 @@ if(!empty($username) && !empty($password)){
                     <td class="tc">类　　型：</td>
                     <td colspan="3"><label class="tips"></label>
 					<label><input type="radio" value="0" name="type" checked="checked">存款</label>
-					<label><input type="radio" value="1" name="type">取款</label>
+					<label><input type="radio" value="1" name="type" id="withdraw">取款</label>
 					<label><input type="radio" value="2" name="type" id="transfer">内部转账</label>
 					</td>
                 </tr>
@@ -190,7 +190,7 @@ if(!empty($username) && !empty($password)){
         } else if (!patrn.test(amount)) {
             $(this).parent().append('<span style="margin-left:6px;">金额格式有误</span>');
             return false;
-        } else if(type == 0 && amount < 300){
+        } else if(type == 0 && amount < 0){
 			$(this).parent().append('<span style="margin-left:6px;">存款金额不得小于300元</span>');
             return false;
 		} else if (type == 1 && parseFloat(amount) > parseFloat("<?php echo $balance?>")){
@@ -246,7 +246,7 @@ if(!empty($username) && !empty($password)){
             $('#txt_Amount').parent().append('<span style="margin-left:6px;">金额格式有误</span>');
             $('#txt_Amount').focus();
             return false;
-        } else if(type == 0 && amount < 300){
+        } else if(type == 0 && amount < 0){
 			$('#txt_Amount').parent().append('<span style="margin-left:6px;">存款金额不得小于300元</span>');
             $('#txt_Amount').focus();
             return false;
@@ -305,6 +305,10 @@ if(!empty($username) && !empty($password)){
 
 	$('#transfer').click(function(){
 		window.location.href = "transfer.php";
+	});
+
+	$('#withdraw').click(function(){
+		window.location.href = "withdraw.php";
 	});
     </script>
 	</body></html>
