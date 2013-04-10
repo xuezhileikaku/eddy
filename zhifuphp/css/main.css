@@ -1,0 +1,40 @@
+﻿* {margin:0; padding:0;}
+.im {ime-mode:disabled;}
+html, body {overflow: hidden;}
+body > div {width:420px; height:360px; margin:auto; padding:10px 20px; border:1px solid #ddd; font-size:12px; font-family:微软雅黑;}
+body > div > table, body > div > form > table {width:100%; table-layout:fixed; border-collapse:collapse;}
+body > div > table td, body > div > form > table td {height:28px; border:1px solid #ccc; padding:0 4px;}
+select {width:186px; padding:2px; height:23px; line-height:23px; border:1px solid #ddd;}
+input[type=text], input[type=password] {width:180px; padding:2px; height:16px; line-height:16px; border:1px solid #ddd;}
+input[type=button], input[type=reset] {background-color:#F5F5F5; background-image:linear-gradient(center top , #F5F5F5, #F1F1F1); border:1px solid #dcdcdc; border:1px solid rgba(0, 0, 0, 0.1); border-radius:2px; color:#666; cursor:default; font-family:arial,sans-serif; font-size:11px; -webkit-text-size-adjust:none; font-weight:bold; height:26px; line-height:24px; margin:4px 6px 4px 0; min-width:54px; padding:0 8px; text-align:center; filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f5f5f5',EndColorStr='#f1f1f1');}
+input[type=button]:hover, input[type=reset]:hover {border:1px solid #C6C6C6; color:#333; box-shadow:0 1px 1px rgba(0, 0, 0, 0.1); background-color:#F8F8F8; background-image:linear-gradient(center top , #F8F8F8, #F1F1F1);}        
+textarea {font-family:'微软雅黑'; outline:none; resize:none; font-size:12px;  padding:2px; height:64px; width:280px; line-height:16px; border:1px solid #ddd;}
+label {margin-right:24px;}
+label.tips {margin:0; float:right;}
+input[type=radio] {margin-right:4px;}
+span {background:url(images/tip_ico.png) no-repeat 4px 2px #FFF2B1; border:1px solid #FEC045; color: #CE0000; padding:2px 4px 2px 20px; white-space:nowrap;}
+
+h3 {text-align:center; font-weight:normal; margin-bottom:10px; font-size:14px;}
+.tc {text-align:center;}
+.tt {padding:4px; text-align:center; vertical-align:top;}
+.tr {text-align:right;}
+img {width:420px; max-height:150px; border:none;}
+#txt_RealName {background:#f5f5f5;}
+textarea {width:325px; overflow-y:auto;}
+a.link {display:block; text-align:center; margin-top:10px; cursor:pointer; height:28px; line-height:28px; border:1px solid #ddd; text-decoration:none; color:blue;}
+a.link:hover {background:#fafafa;}
+
+#glasslayer {display:none; width:100%; height:100%; background:#000; filter:alpha(opacity=10); opacity:0.1; position:fixed; _position:absolute; top:0px; left:0px; z-index:999;}
+#success, #alter, #alter2 {display:none; width:400px; height:260px; padding:5px; margin:-164px auto auto -200px; position:fixed; _position:absolute; top:50%; left:50%; z-index:1001; background:url(images/border_bg.png); border-radius:5px; font-family:微软雅黑;}
+#success > div, #alter> div, #alter2> div {padding:10px; border:1px solid #A0A0A0; width:378px; height:238px; background:#fafafa; overflow:hidden; position:relative;}
+#success b, #alter b, #alter2 b {height:12px; line-height:12px; padding:0 4px 10px 4px; border-bottom:1px solid #ccc; display:block; text-align:center;}
+#success table, #alter table, #alter2 table {border-collapse:collapse; width:100%;}
+#success td, #alter td, #alter2 td {height:36px; font-weight:normal; color:#666;}
+#success tfoot td, #alter tfoot td, #alter2 tfoot td {border-top:1px solid #ccc; padding:4px; line-height:18px;}
+#success input[type=text], #success input[type=password], #alter input[type=text], #alter input[type=password], #alter2 input[type=text], #alter2 input[type=password] {border:1px solid #DEDEDE; font-family:微软雅黑; padding:2px; width:200px; color:#666;}
+#success input[type=submit], #success input[type=reset], #alter input[type=submit], #alter input[type=button], #alter2 input[type=submit], #alter2 input[type=button] {background-color:#F5F5F5; background-image:linear-gradient(center top , #F5F5F5, #F1F1F1); border:1px solid #dcdcdc; border:1px solid rgba(0, 0, 0, 0.1); border-radius:2px; color:#666; cursor:default; font-family:arial,sans-serif; font-size:11px; -webkit-text-size-adjust:none; font-weight:bold; height:26px; line-height:24px; margin:4px 6px 4px 0; min-width:66px; padding:0 8px; text-align:center; filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f5f5f5',EndColorStr='#f1f1f1');}
+#success input[type=submit], #alter input[type=submit], #alter2 input[type=submit] {background-color:#d7e0e1; background-image:linear-gradient(center top , #d7e0e1, #cad3d4);  filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#d7e0e1',EndColorStr='#cad3d4'); border:1px solid #b3c3c4; }
+#success input[type=submit]:hover, #success input[type=reset]:hover, #alter input[type=submit]:hover, #alter input[type=button]:hover, #alter2 input[type=submit]:hover, #alter2 input[type=button]:hover {border:1px solid #C6C6C6; color:#333; box-shadow:0 1px 1px rgba(0, 0, 0, 0.1); background-color:#F8F8F8; background-image:linear-gradient(center top , #F8F8F8, #F1F1F1);}
+#success input[type=submit]:hover, #alter input[type=submit]:hover, #alter2 input[type=submit]:hover {border:1px solid #a4b1b2; background-color:#dfe7e8; background-image:linear-gradient(center top , #dfe7e8, #dae2e3); filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#dfe7e8',EndColorStr='#dae2e3');}
+#alter, #alter2 {width:320px; height:150px; margin:-114px auto auto -166px;}
+#alter > div, #alter2 > div {width:298px; height:128px;}
