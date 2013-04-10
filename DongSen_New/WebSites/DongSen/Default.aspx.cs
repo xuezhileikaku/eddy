@@ -67,7 +67,7 @@ public partial class _Default : System.Web.UI.Page
                         curPort = si.Port;
                     }
                 }
-                if (curIp == "211.55.29.30")
+                if (curIp == "117.25.147.236")
                 {
                     LabelInfo.Text = "网络不通，连接服务器失败";
                     triggerButton.Enabled = true;
