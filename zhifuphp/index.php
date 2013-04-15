@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <td class="tt">备　　注：</td>
-                    <td colspan="3" style="padding:4px;"><textarea id="txt_Remark" name="remark"></textarea></td>
+                    <td colspan="3" style="padding:4px;"><textarea id="txt_Remark" name="remark">请在此栏填写用户姓名、取款银行名及银行帐号等相关信息</textarea></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -116,6 +116,18 @@
             return false;
 		}
 	});
+	
+	$('#txt_Remark').focus(function(){
+		if($(this).val().substr(0,6) == "请在此栏填写"){
+			$(this).val("");
+		}
+	});
+	$('#txt_Remark').blur(function(){
+		if($(this).val() == ""){
+			$(this).val("请在此栏填写用户姓名、取款银行名及银行帐号等相关信息");
+		}
+	});
+
     function submitOrder() {
         $('table span').remove();           
         var type = $(':radio[name=type]:checked').val();
@@ -161,8 +173,8 @@
         }
 
 		var beizhu = $('#txt_Remark').val().trim();
-		if (type == 1 && beizhu.length == 0) {
-            alert("请在备注栏输入本次取款的相关信息");
+		if (beizhu.length == 0 || beizhu.substr(0,6)=="请在此栏填写") {
+            alert("请在备注栏输入本次存/取款的相关信息，如用户姓名、取款银行名及银行帐号等信息");
             return false;
         }
 
