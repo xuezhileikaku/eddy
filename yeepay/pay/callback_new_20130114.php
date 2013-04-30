@@ -220,7 +220,7 @@ if($bRet){
 				$mail->AddReplyTo("yiyiyitest@163.com","Admin");//回复地址
 				$mail->From       = "yiyiyitest@163.com";
 				$mail->FromName   = "Admin";
-				$to = "alarongold@163.com";
+				$to = "";
 				$mail->AddAddress($to);
 				$mail->Subject  = "在线入金通知";
 				//发送的内容
