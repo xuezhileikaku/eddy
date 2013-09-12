@@ -12,6 +12,28 @@ Begin VB.Form Form1
    ScaleHeight     =   5445
    ScaleWidth      =   6480
    StartUpPosition =   2  '屏幕中心
+   Begin VB.TextBox Text2 
+      Height          =   330
+      Left            =   1575
+      TabIndex        =   42
+      Text            =   "SuperStk"
+      Top             =   4950
+      Width           =   1995
+   End
+   Begin VB.Timer Timer2 
+      Enabled         =   0   'False
+      Interval        =   2000
+      Left            =   270
+      Top             =   4905
+   End
+   Begin VB.CommandButton Command3 
+      Caption         =   "kill window"
+      Height          =   375
+      Left            =   3735
+      TabIndex        =   41
+      Top             =   4950
+      Width           =   1365
+   End
    Begin VB.ComboBox Combo1 
       Height          =   300
       ItemData        =   "Form1.frx":058A
@@ -231,8 +253,8 @@ Begin VB.Form Form1
       Width           =   1095
    End
    Begin MSComDlg.CommonDialog cmd 
-      Left            =   675
-      Top             =   4950
+      Left            =   135
+      Top             =   4860
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
@@ -290,6 +312,14 @@ Begin VB.Form Form1
       TabIndex        =   0
       Top             =   4950
       Width           =   1095
+   End
+   Begin VB.Label Label8 
+      Caption         =   "Window Title"
+      Height          =   240
+      Left            =   360
+      TabIndex        =   43
+      Top             =   4995
+      Width           =   1140
    End
    Begin VB.Label lines 
       Caption         =   "lines"
@@ -362,6 +392,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+Private Const WM_CLOSE = &H10
+
 Private Sub Command1_Click()
     On Error Resume Next
     If Text3.Text = "" Then
@@ -391,6 +425,16 @@ Private Sub Command2_Click()
 cmd.Filter = "tb_stkinfo1.txt|tb_s*.txt|文本文件|*.txt"
 cmd.ShowOpen
 Text3.Text = cmd.FileName
+End Sub
+
+Private Sub Command3_Click()
+If Command3.Caption <> "stop" Then
+    Timer2.Enabled = True
+    Command3.Caption = "stop"
+Else
+    Timer2.Enabled = False
+    Command3.Caption = "kill window"
+End If
 End Sub
 
 Private Sub Form_Load()
@@ -458,3 +502,15 @@ Private Function handleTxt(ByVal strResult As String, ByVal lines As Integer)
     data28 = mydata(6)(16)
     
 End Function
+
+Private Sub Timer2_Timer()
+Dim hWindow As Long, title As String, sTitle() As String, i As Variant
+title = Text2.Text
+sTitle = Split(title, "#")
+For Each i In sTitle
+    hWindow = FindWindow(vbNullString, i)
+    If hWindow <> 0 Then
+        SendMessage hWindow, WM_CLOSE, 0, 0
+    End If
+Next i
+End Sub
